@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Bodega - Ferretería Marsella</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Librerías externas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fondo-gris: #2F2F2F;
+            --color-rojo-alerta: #D50000;
+            --color-blanco: #FFFFFF;
+            --color-verde-promocion: #007A33;
+            --color-negro: #000000;
+            --color-gris-placeholder: #BFBFBF;
+        }
+
+        body.dark-mode {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .card {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border: 1px solid var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .list-group-item {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border-color: var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .bg-white {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .text-dark {
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .breadcrumb-item a {
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .breadcrumb-item.active {
+            color: var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .btn-outline-dark {
+            color: var(--color-blanco) !important;
+            border-color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .btn-outline-dark:hover {
+            background-color: var(--color-gris-placeholder) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .shadow {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark-mode footer.bg-dark {
+            background-color: var(--color-negro) !important;
+        }
+
+        header img {
+            width: auto;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .carousel .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .card.border-0 {
+            transition: transform 0.2s;
+        }
+
+        .card.border-0:hover {
+            transform: translateY(-5px);
+        }
+
+        .animate__animated {
+            animation-duration: 1s;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <header class="container-fluid bg-white text-dark p-3 shadow">
+        <div class="d-flex justify-content-between align-items-center">
+            <img src="img/MARSELLA (2).png" alt="Logo Ferretería Marsella" style="width: auto; height: 60px; object-fit: contain;" class="rounded animate__animated animate__fadeIn">
+            <div>
+                <span class="me-3">Bienvenido/a: <strong id="userName">Millaray Esposito</strong></span>
+                <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn"><i class="fas fa-moon me-2"></i>Modo Noche</button>
+                <a href="logout.html" class="btn btn-danger ms-2">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="text-dark"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sistema de Gestión de Bodega</li>
+            </ol>
+        </nav>
+
+        <h3 class="mb-4 text-dark">Sistema Gestión de Bodega</h3>
+
+        <div class="row g-4">
+            <!-- Gestión de Inventario -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-boxes me-2"></i>Gestión de Inventario</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="Trans_stock.html" class="text-decoration-none text-dark"><i class="fas fa-exchange-alt me-2"></i>Transferencia de stock</a></li>
+                            <li class="list-group-item"><a href="datos_ma.html" class="text-decoration-none text-dark"><i class="fas fa-exchange-alt me-2"></i>Datos maestros de articulos</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operaciones de Picking -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Operaciones de Picking</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-tasks me-2"></i>Procesamiento de picking</li>
+                            <li class="list-group-item"><i class="fas fa-file-invoice me-2"></i>Gestión de órdenes</li>
+                            <li class="list-group-item"><i class="fas fa-box-open me-2"></i>Preparación de pedidos</li>
+                            <li class="list-group-item"><i class="fas fa-truck me-2"></i>Logística de despachos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control de Recepción -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0"><i class="fas fa-truck-loading me-2"></i>Control de Recepción</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fas fa-file-import me-2"></i>Procesamiento de órdenes de compra</li>
+                            <li class="list-group-item"><i class="fas fa-search me-2"></i>Inspección de mercadería</li>
+                            <li class="list-group-item"><i class="fas fa-certificate me-2"></i>Aseguramiento de calidad</li>
+                            <li class="list-group-item"><i class="fas fa-file-alt me-2"></i>Gestión documental</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrusel de Funciones -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <!-- Inventario -->
+                        <div class="carousel-item active">
+                            <img src="img/logistica.webp" class="d-block w-100" alt="Gestión de Inventario" style="height: 400px; object-fit: cover;">
+                            <div class="carousel-caption">
+                                <div class="card border-0 shadow bg-dark bg-opacity-75">
+                                    <div class="card-header bg-primary text-white">
+                                        <h5 class="mb-0"><i class="fas fa-boxes me-2"></i>Gestión de Inventario</h5>
+                                    </div>
+                                    <div class="card-body text-white">
+                                        <p>Sistema automatizado para control de stock en tiempo real, con alertas de niveles mínimos y máximos, reportes personalizados y trazabilidad completa de productos.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Picking -->
+                        <div class="carousel-item">
+                            <img src="img/picking.webp" class="d-block w-100" alt="Operaciones de Picking" style="height: 400px; object-fit: cover;">
+                            <div class="carousel-caption">
+                                <div class="card border-0 shadow bg-dark bg-opacity-75">
+                                    <div class="card-header bg-danger text-white">
+                                        <h5 class="mb-0"><i class="fas fa-shipping-fast me-2"></i>Operaciones de Picking</h5>
+                                    </div>
+                                    <div class="card-body text-white">
+                                        <p>Sistema de picking guiado por voz y escáner, optimización de rutas de recolección, gestión de lotes y fechas de vencimiento.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Recepción -->
+                        <div class="carousel-item">
+                            <img src="img/Alfin.png" class="d-block w-100" alt="Control de Recepción" style="height: 400px; object-fit: cover;">
+                            <div class="carousel-caption">
+                                <div class="card border-0 shadow bg-dark bg-opacity-75">
+                                    <div class="card-header bg-success text-white">
+                                        <h5 class="mb-0"><i class="fas fa-truck-loading me-2"></i>Control de Recepción</h5>
+                                    </div>
+                                    <div class="card-body text-white">
+                                        <p>Plataforma digital de programación de recepciones, control de documentación electrónica y sistema de etiquetado automático con códigos QR.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="border-bottom pb-2">Ferretería Marsella</h5>
+                    <p class="small">Sistema Integrado de Gestión de Bodega</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                // Actualizar el texto del botón
+                const darkModeBtn = document.getElementById('darkModeBtn');
+                if (isDarkMode) {
+                    darkModeBtn.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+                } else {
+                    darkModeBtn.innerHTML = '<i class="fas fa-moon me-2"></i>Modo Noche';
+                }
+    }
+
+    // Verificar preferencia guardada al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                if (isDarkMode) {
+                    toggleDarkMode();
+                }
+    });
+    </script>
+</body>
+</html>

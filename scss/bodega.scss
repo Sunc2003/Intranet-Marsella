@@ -1,0 +1,103 @@
+
+// Variables
+$dark-bg: #1a1a1a;
+$dark-card-bg: #2d2d2d;
+$dark-border: #404040;
+$dark-text: #e0e0e0;
+$dark-text-muted: #909090;
+$dark-footer: #0d0d0d;
+
+// Estilos generales
+body {
+  &.dark-mode {
+    background-color: $dark-bg !important;
+    color: $dark-text !important;
+  }
+}
+
+// Estilos para modo oscuro
+.dark-mode {
+  .card {
+    background-color: $dark-card-bg !important;
+    color: $dark-text !important;
+    border: 1px solid $dark-border !important;
+  }
+
+  .list-group-item {
+    background-color: $dark-card-bg !important;
+    color: $dark-text !important;
+    border-color: $dark-border !important;
+  }
+
+  .bg-white {
+    background-color: $dark-bg !important;
+    color: $dark-text !important;
+  }
+
+  .text-dark {
+    color: $dark-text !important;
+  }
+
+  .breadcrumb-item {
+    a {
+      color: $dark-text !important;
+    }
+
+    &.active {
+      color: $dark-text-muted !important;
+    }
+  }
+
+  .btn-outline-dark {
+    color: $dark-text !important;
+    border-color: $dark-text !important;
+
+    &:hover {
+      background-color: $dark-border !important;
+      color: #ffffff !important;
+    }
+  }
+
+  .shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+  }
+
+  footer.bg-dark {
+    background-color: $dark-footer !important;
+  }
+}
+
+// Estilos del header
+header {
+  img {
+    width: auto;
+    height: 60px;
+    object-fit: contain;
+  }
+}
+
+// Estilos del carrusel
+.carousel {
+  .carousel-item {
+    img {
+      height: 400px;
+      object-fit: cover;
+    }
+  }
+}
+
+// Estilos de las cards
+.card {
+  &.border-0 {
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+// Animaciones
+.animate__animated {
+  animation-duration: 1s;
+}

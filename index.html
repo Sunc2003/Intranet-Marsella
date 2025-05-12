@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Intranet - Ferretería Marsella</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<header class="container-fluid bg-secondary text-white p-3 shadow">
+    <div class="d-flex justify-content-between align-items-center">
+        <img src="img/MARSELLA (2).png" alt="Logo Marsella" style="max-height: 60px;" class="rounded animate__animated animate__fadeIn">
+        <div class="d-flex gap-2">
+            <span class="me-3 text-dark d-flex align-items-center">Bienvenido/a: <strong>Usuario</strong></span>
+            <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn"><i class="fas fa-moon me-2"></i>Modo noche</button>
+            <button class="btn btn-dark" style="background-color: #ac0303;" data-bs-toggle="modal" data-bs-target="#perfilModal">Mi Perfil</button>
+            <a href="logout.html" class="btn btn-dark" style="background-color: #ac0303;">Cerrar Sesión</a>
+        </div>
+    </div>
+</header>
+<style>
+.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .card {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border: 1px solid #404040 !important;
+}
+
+.dark-mode .list-group-item {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #404040 !important;
+}
+
+.dark-mode .bg-white {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .text-dark {
+    color: #ffffff !important;
+}
+
+.dark-mode .breadcrumb-item a {
+    color: #ffffff !important;
+}
+
+.dark-mode .breadcrumb-item.active {
+    color: #ffffff !important;
+}
+
+.dark-mode .btn-outline-dark {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+.dark-mode .btn-outline-dark:hover {
+    background-color: #404040 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
+
+.dark-mode footer.bg-dark {
+    background-color: #0d0d0d !important;
+}
+
+.dark-mode .text-muted {
+    color: #ffffff !important;
+}
+
+.dark-mode small {
+    color: #ffffff !important;
+}
+
+.dark-mode h4, .dark-mode h5, .dark-mode h6, .dark-mode p {
+    color: #ffffff !important;
+}
+
+.dark-mode .card-header h5, .dark-mode .card-header h2 {
+    color: #000000 !important;
+}
+</style>
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const header = document.querySelector('header');
+    header.classList.toggle('dark-mode');
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => card.classList.toggle('dark-mode'));
+
+    // Actualizar el botón según el modo
+    const darkModeBtn = document.getElementById('darkModeBtn');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    if (isDarkMode) {
+        darkModeBtn.innerHTML = '<i class="fas fa-sun me-2"></i>Modo día';
+    } else {
+        darkModeBtn.innerHTML = '<i class="fas fa-moon me-2"></i>Modo noche';
+    }
+
+    // Guardar preferencia en localStorage
+    localStorage.setItem('darkMode', isDarkMode);
+}
+
+// Verificar preferencia guardada al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        toggleDarkMode();
+    }
+});
+</script>    <!-- Menú de Áreas -->
+    <nav class="bg-dark p-3 sticky-top shadow">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="bodega.html"><i class="fas fa-warehouse me-2"></i> Bodega</a></li>
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="ventas"><i class="fas fa-cash-register me-2"></i> Ventas</a></li>
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="contabilidad"><i class="fas fa-calculator me-2"></i>Contabilidad</a></li>
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="rrhh"><i class="fas fa-users me-2"></i>RRHH</a></li>
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="compras"><i class="fas fa-cogs me-2"></i> Compras</a></li>
+            <li class="nav-item"><a class="nav-link text-white hover-effect" href="finanzas"><i class="fas fa-users me-2"></i> Finanzas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="container mt-4">
+        <div class="row g-4">
+            <div class="col-md-8">
+                <div class="card shadow h-100">
+                    <div class="card-header bg-secondary text-white">
+                        <h2 class="card-title h4 mb-0">Acceso Área</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="text-dark"><i class="fas fa-database text-primary me-2"></i>Módulos</h5>
+                                        <p class="mb-0">Accede a tu módulo correspondiente</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="text-dark"><i class="fas fa-tasks text-success me-2"></i>Transacciones Frecuentes</h5>
+                                        <p class="mb-0">Acceso rápido a transacciones</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle me-2"></i>Selecciona tu área para acceder a las funciones específicas 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Accesos SAP</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a href="sap/documentos" class="list-group-item list-group-item-action d-flex align-items-center">
+                                <i class="fas fa-file-alt me-3 text-primary"></i>
+                                <div>
+                                    <h6 class="text-dark mb-0">Documentos SAP</h6>
+                                    <small class="text-muted">Documentación y manuales</small>
+                                </div>
+                            </a>
+                            <a href="sap/reportes" class="list-group-item list-group-item-action d-flex align-items-center">
+                                <i class="fas fa-chart-bar me-3 text-success"></i>
+                                <div>
+                                    <h6 class="text-dark mb-0">Reportes SAP</h6>
+                                    <small class="text-muted">Informes y análisis</small>
+                                </div>
+                            </a>
+                            <a href="sap/transacciones" class="list-group-item list-group-item-action d-flex align-items-center">
+                                <i class="fas fa-exchange-alt me-3 text-warning"></i>
+                                <div>
+                                    <h6 class="text-dark mb-0">Transacciones</h6>
+                                    <small class="text-muted">Códigos de transacción</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Estadísticas -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header bg-secondary text-white">
+                        <h5 class="mb-0">Actividad SAP</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="border rounded p-3">
+                                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                                    <h4>150+</h4>
+                                    <p class="mb-0">Usuarios SAP Activos</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="border rounded p-3">
+                                    <i class="fas fa-project-diagram fa-2x text-success mb-2"></i>
+                                    <h4>25</h4>
+                                    <p class="mb-0">Módulos Activos</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="border rounded p-3">
+                                    <i class="fas fa-tasks fa-2x text-warning mb-2"></i>
+                                    <h4>89%</h4>
+                                    <p class="mb-0">Eficiencia del Sistema</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="border rounded p-3">
+                                    <i class="fas fa-chart-line fa-2x text-danger mb-2"></i>
+                                    <h4>15K</h4>
+                                    <p class="mb-0">Transacciones Diarias</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Perfil -->
+    <div class="modal fade" id="perfilModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title">Perfil de Usuario SAP</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <img src="img/avatar.jpg" class="rounded-circle shadow" alt="Avatar" style="width: 120px;">
+                        <h4 class="mt-3">Usuario</h4>
+                        <span class="badge bg-secondary">Usuario SAP</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-user me-2"></i>Usuario SAP:</label>
+                        <input type="text" class="form-control" value="Usuario" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-building me-2"></i>Módulo SAP:</label>
+                        <input type="text" class="form-control" value="Módulo Asignado" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><i class="fas fa-envelope me-2"></i>Correo:</label>
+                        <input type="email" class="form-control" value="usuario@marsella.com" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Actualizar Perfil SAP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- Pie de Página -->
+      <footer class="bg-dark text-white py-5 mt-5">
+          <div class="container">
+              <div class="row g-4">
+                  <div class="col-md-4">
+                      <h5 class="text-white fw-bold mb-3">Ferretería Marsella - SAP</h5>
+                      <p class="small text-white-50">Sistema Integrado SAP para gestión empresarial</p>
+                      <div class="mt-3">
+                          <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                          <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                          <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <h5 class="text-white fw-bold mb-3">Enlaces SAP</h5>
+                      <ul class="list-unstyled">
+                          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white"><i class="fas fa-book me-2"></i>Manual SAP</a></li>
+                          <li class="mb-2"><a href="#" class="text-white-50 text-decoration-none hover-white"><i class="fas fa-user-guide me-2"></i>Guías de Usuario</a></li>
+                          <li><a href="#" class="text-white-50 text-decoration-none hover-white"><i

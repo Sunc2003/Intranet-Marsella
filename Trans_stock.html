@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transferencia de Stock - Ferretería Marsella</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fondo-gris: #1a1a1a;
+            --color-rojo-alerta: #ff4444;
+            --color-blanco: #FFFFFF;
+            --color-verde-promocion: #00C851;
+            --color-negro: #121212;
+            --color-gris-placeholder: #6c757d;
+            --color-card-dark: #242424;
+            --color-hover-dark: #2c2c2c;
+        }
+
+        body.dark-mode {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .card {
+            background-color: var(--color-card-dark) !important;
+            color: var(--color-blanco) !important;
+            border: 1px solid var(--color-gris-placeholder) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .form-control, .dark-mode .form-select {
+            background-color: var(--color-negro);
+            border-color: var(--color-gris-placeholder);
+            color: var(--color-blanco);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .form-control::placeholder {
+            color: var(--color-blanco);
+        }
+
+        .dark-mode .form-control:focus, .dark-mode .form-select:focus {
+            background-color: var(--color-negro);
+            border-color: var(--color-rojo-alerta);
+            box-shadow: 0 0 0 0.25rem rgba(255, 68, 68, 0.25);
+        }
+
+        .dark-mode .table {
+            color: var(--color-blanco);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .bg-white {
+            background-color: var(--color-card-dark) !important;
+            color: var(--color-blanco) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .breadcrumb-item a {
+            color: var(--color-rojo-alerta) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .breadcrumb-item.active {
+            color: var(--color-blanco);
+        }
+
+        .dark-mode .btn-outline-dark {
+            color: var(--color-blanco);
+            border-color: var(--color-blanco);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .btn-outline-dark:hover {
+            color: var(--color-negro);
+            background-color: var(--color-blanco);
+        }
+
+        .dark-mode .table-hover tbody tr:hover {
+            background-color: var(--color-hover-dark);
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer {
+            background-color: var(--color-negro) !important;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .text-dark {
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode label {
+            color: var(--color-blanco);
+        }
+
+        .dark-mode .form-label {
+            color: var(--color-blanco);
+        }
+
+        .bg-primary {
+            background-color: var(--color-rojo-alerta) !important;
+        }
+
+        .bg-info {
+            background-color: #17a2b8 !important;
+        }
+
+        .btn-primary {
+            background-color: var(--color-rojo-alerta);
+            border-color: var(--color-rojo-alerta);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6666;
+            border-color: #ff6666;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            transition: all 0.3s ease;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #138496;
+        }
+
+        .badge.bg-success {
+            background-color: var(--color-verde-promocion) !important;
+        }
+    </style>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const button = document.getElementById('darkModeBtn');
+            const icon = button.querySelector('i');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                button.innerHTML = '<i class="fas fa-moon me-2"></i>Modo Noche';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        // Check dark mode preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const button = document.getElementById('darkModeBtn');
+                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+            }
+        });
+    </script>
+</head>
+<body class="bg-light">
+    <header class="container-fluid bg-white text-dark p-3 shadow">
+        <div class="d-flex justify-content-between align-items-center">
+            <img src="img/MARSELLA (2).png" alt="Logo Ferretería Marsella" style="width: auto; height: 60px; object-fit: contain;" class="rounded animate__animated animate__fadeIn">
+            <div>
+                <span class="me-3">Bienvenido/a: <strong id="userName">Millaray Esposito</strong></span>
+                <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn"><i class="fas fa-moon me-2"></i>Modo Noche</button>
+                <a href="logout.html" class="btn btn-danger ms-2">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="bodega.html" class="text-dark"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item">Gestión de Inventario</li>
+                <li class="breadcrumb-item active" aria-current="page">Transferencia de Stock</li>
+            </ol>
+        </nav>
+
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-exchange-alt me-2"></i>Transferencia de Stock</h5>
+            </div>
+            <div class="card-body">
+                <form id="transferForm">  
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Bodega Origen</label>
+                            <select class="form-select" required>
+                                <option value="">Seleccionar bodega origen</option>
+                                <option value="1">ALMACEN CENTRAL</option>
+                                <option value="2">ALMACÉN ISS</option>
+                                <option value="3">PRODUCCIONES</option>
+                                <option value="4">ALMACÉN MERMA</option>
+                                <option value="5">ALMACEN P. INVENTARIO</option>
+                                <option value="6">ALMACEN MUESTRA</option>
+                                <option value="7">TRASPASOS MARSELLA/ASLAND</option>
+                                <option value="7">ALMACÉN ANTOFAGASTA</option>
+                                <option value="7">ALMACÉN INTERNO ANTOFAGASTA</option>
+                                <option value="7">INTERNACIONAL</option>
+                                <option value="7">ACLARACIÓN</option>
+                                <option value="7">DEVOLUCIÓN MOMENTÁNEA</option>
+                                <option value="7">ALMACÉN PICKING / ENTREGAS</option>
+                                <option value="7">REFACTURACIÓN</option>
+                                <option value="7">ALMACEN PETROLEO </option>
+                                <option value="7">ALMACÉN MERCADO LIBRE </option>
+                                <option value="7">ALMACEN SERVICIO TECNICO </option>
+                                <option value="7">ALMACÉN TRANSITORIO </option>
+                                <option value="7">M/GUARDAR </option>
+                                <option value="7">EQUIPOS TECNOLÓGICOS </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Bodega Destino</label>
+                            <select class="form-select" required>
+                                <option value="">Seleccionar bodega origen</option>
+                                <option value="1">ALMACEN CENTRAL</option>
+                                <option value="2">ALMACÉN ISS</option>
+                                <option value="3">PRODUCCIONES</option>
+                                <option value="4">ALMACÉN MERMA</option>
+                                <option value="5">ALMACEN P. INVENTARIO</option>
+                                <option value="6">ALMACEN MUESTRA</option>
+                                <option value="7">TRASPASOS MARSELLA/ASLAND</option>
+                                <option value="7">ALMACÉN ANTOFAGASTA</option>
+                                <option value="7">ALMACÉN INTERNO ANTOFAGASTA</option>
+                                <option value="7">INTERNACIONAL</option>
+                                <option value="7">ACLARACIÓN</option>
+                                <option value="7">DEVOLUCIÓN MOMENTÁNEA</option>
+                                <option value="7">ALMACÉN PICKING / ENTREGAS</option>
+                                <option value="7">REFACTURACIÓN</option>
+                                <option value="7">ALMACEN PETROLEO </option>
+                                <option value="7">ALMACÉN MERCADO LIBRE </option>
+                                <option value="7">ALMACEN SERVICIO TECNICO </option>
+                                <option value="7">ALMACÉN TRANSITORIO </option>
+                                <option value="7">M/GUARDAR </option>
+                                <option value="7">EQUIPOS TECNOLÓGICOS </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Código Producto</label>
+                            <input type="text" class="form-control" placeholder="Ingrese código" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Cantidad</label>
+                            <input type="number" class="form-control" min="1" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Motivo</label>
+                            <select class="form-select" required>
+                                <option value="">Seleccionar motivo</option>
+                                <option value="1">Reposición</option>
+                                <option value="2">Reorganización</option>
+                                <option value="3">Inventario</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Almacén Destino</label>
+                            <input type="text" class="form-control" placeholder="Ej: Pasillo 3, Estante 2" required>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Realizar Transferencia</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card shadow dark-mode-card">
+            <div class="card-header bg-info text-white dark-mode-header">
+                <h5 class="mb-0"><i class="fas fa-history me-2"></i>Historial de Transferencias</h5>
+            </div>
+            <div class="card-body dark-mode-body">
+                <div class="table-responsive">
+                    <table class="table table-hover dark-mode-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>N° Transferencia</th>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                                <th>Ubicación Origen</th>
+                                <th>Ubicación Destino</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-07-20</td>
+                                <td>TRF001</td>
+                                <td>Bodega Principal</td>
+                                <td>Bodega Secundaria</td>
+                                <td>Pasillo 3, Estante 2</td>
+                                <td>Pasillo 1, Estante 4</td>
+                                <td>Martillo Stanley</td>
+                                <td>50</td>
+                                <td><span class="badge bg-success">Completada</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023-07-19</td>
+                                <td>TRF002</td>
+                                <td>Bodega Secundaria</td>
+                                <td>Bodega de Reserva</td>
+                                <td>Pasillo 1, Estante 5</td>
+                                <td>Pasillo 2, Estante 3</td>
+                                <td>Tornillos 5mm</td>
+                                <td>1000</td>
+                                <td><span class="badge bg-warning">Pendiente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
+                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<style>
+/* Dark Mode Styles */
+.dark-mode .dark-mode-card {
+    background-color: #1a1a1a;
+    border-color: #2d2d2d;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .dark-mode-header {
+    background-color: #17a2b8 !important;
+    border-bottom: 1px solid #2d2d2d;
+    color: #ffffff;
+}
+
+.dark-mode .dark-mode-body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+.dark-mode .dark-mode-table {
+    color: #ffffff;
+}
+
+.dark-mode .dark-mode-table thead th {
+    border-bottom-color: #2d2d2d;
+    background-color: #242424;
+    color: #ffffff;
+}
+
+.dark-mode .dark-mode-table td {
+    border-color: #2d2d2d;
+}
+
+.dark-mode .dark-mode-table tbody tr:hover {
+    background-color: #2d2d2d;
+}
+
+.dark-mode .btn-info {
+    background-color: #17a2b8;
+    border-color: #138496;
+    color: #ffffff;
+}
+
+.dark-mode .btn-info:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+.dark-mode .btn-secondary {
+    background-color: #6c757d;
+    border-color: #545b62;
+    color: #ffffff;
+}
+
+.dark-mode .btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+}
+
+.dark-mode .badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.dark-mode .badge.bg-warning {
+    background-color: #ffc107 !important;
+    color: #000000;
+}
+</style>    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="border-bottom pb-2">Ferretería Marsella</h5>
+                    <p class="small">Sistema Integrado de Gestión de Bodega</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
