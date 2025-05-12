@@ -168,7 +168,84 @@
                 const button = document.getElementById('darkModeBtn');
                 button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
             }
+            
+            // Cargar transferencias guardadas
+            const transferencias = JSON.parse(localStorage.getItem('transferencias') || '[]');
+            const tbody = document.querySelector('.table tbody');
+            transferencias.forEach(transfer => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${transfer.fecha}</td>
+                    <td>${transfer.codigo}</td>
+                    <td>${transfer.origen}</td>
+                    <td>${transfer.destino}</td>
+                    <td>${transfer.ubicacion}</td>
+                    <td>${transfer.ubicacionDestino}</td>
+                    <td>${transfer.producto}</td>
+                    <td>${transfer.cantidad}</td>
+                    <td><span class="badge bg-success">Completada</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                    </td>
+                `;
+                tbody.insertBefore(newRow, tbody.firstChild);
+            });
         });
+
+        // Función para agregar transferencia al historial
+        function agregarTransferencia(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('transferForm');
+            const fecha = new Date().toISOString().split('T')[0];
+            const codigo = 'TRF' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            const origen = form.querySelector('select:nth-of-type(1)').options[form.querySelector('select:nth-of-type(1)').selectedIndex].text;
+            const destino = form.querySelector('select:nth-of-type(2)').options[form.querySelector('select:nth-of-type(2)').selectedIndex].text;
+            const producto = form.querySelector('input[placeholder="Ingrese código"]').value;
+            const cantidad = form.querySelector('input[type="number"]').value;
+            const ubicacion = form.querySelector('input[placeholder="Ej: Pasillo 3, Estante 2"]').value;
+            const ubicacionDestino = 'Por asignar';
+
+            const transferencia = {
+                fecha,
+                codigo,
+                origen,
+                destino,
+                ubicacion,
+                ubicacionDestino,
+                producto,
+                cantidad
+            };
+
+            // Guardar en localStorage
+            const transferencias = JSON.parse(localStorage.getItem('transferencias') || '[]');
+            transferencias.unshift(transferencia);
+            localStorage.setItem('transferencias', JSON.stringify(transferencias));
+
+            const tbody = document.querySelector('.table tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${fecha}</td>
+                <td>${codigo}</td>
+                <td>${origen}</td>
+                <td>${destino}</td>
+                <td>${ubicacion}</td>
+                <td>${ubicacionDestino}</td>
+                <td>${producto}</td>
+                <td>${cantidad}</td>
+                <td><span class="badge bg-success">Completada</span></td>
+                <td>
+                    <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
+                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
+                </td>
+            `;
+            tbody.insertBefore(newRow, tbody.firstChild);
+            form.reset();
+        }
+
+        // Agregar evento submit al formulario
+        document.getElementById('transferForm').addEventListener('submit', agregarTransferencia);
     </script>
 </head>
 <body class="bg-light">
@@ -200,55 +277,55 @@
                 <form id="transferForm">  
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Bodega Origen</label>
-                            <select class="form-select" required>
+                            <label class="form-label">Almacén Origen</label>
+                            <select class="form-select" name="origen" required>
                                 <option value="">Seleccionar bodega origen</option>
-                                <option value="1">ALMACEN CENTRAL</option>
-                                <option value="2">ALMACÉN ISS</option>
-                                <option value="3">PRODUCCIONES</option>
-                                <option value="4">ALMACÉN MERMA</option>
-                                <option value="5">ALMACEN P. INVENTARIO</option>
-                                <option value="6">ALMACEN MUESTRA</option>
-                                <option value="7">TRASPASOS MARSELLA/ASLAND</option>
-                                <option value="7">ALMACÉN ANTOFAGASTA</option>
-                                <option value="7">ALMACÉN INTERNO ANTOFAGASTA</option>
-                                <option value="7">INTERNACIONAL</option>
-                                <option value="7">ACLARACIÓN</option>
-                                <option value="7">DEVOLUCIÓN MOMENTÁNEA</option>
-                                <option value="7">ALMACÉN PICKING / ENTREGAS</option>
-                                <option value="7">REFACTURACIÓN</option>
-                                <option value="7">ALMACEN PETROLEO </option>
-                                <option value="7">ALMACÉN MERCADO LIBRE </option>
-                                <option value="7">ALMACEN SERVICIO TECNICO </option>
-                                <option value="7">ALMACÉN TRANSITORIO </option>
-                                <option value="7">M/GUARDAR </option>
-                                <option value="7">EQUIPOS TECNOLÓGICOS </option>
+                                <option value="ALMACEN CENTRAL">ALMACEN CENTRAL</option>
+                                <option value="ALMACÉN ISS">ALMACÉN ISS</option>
+                                <option value="PRODUCCIONES">PRODUCCIONES</option>
+                                <option value="ALMACÉN MERMA">ALMACÉN MERMA</option>
+                                <option value="ALMACEN P. INVENTARIO">ALMACEN P. INVENTARIO</option>
+                                <option value="ALMACEN MUESTRA">ALMACEN MUESTRA</option>
+                                <option value="TRASPASOS MARSELLA/ASLAND">TRASPASOS MARSELLA/ASLAND</option>
+                                <option value="ALMACÉN ANTOFAGASTA">ALMACÉN ANTOFAGASTA</option>
+                                <option value="ALMACÉN INTERNO ANTOFAGASTA">ALMACÉN INTERNO ANTOFAGASTA</option>
+                                <option value="INTERNACIONAL">INTERNACIONAL</option>
+                                <option value="ACLARACIÓN">ACLARACIÓN</option>
+                                <option value="DEVOLUCIÓN MOMENTÁNEA">DEVOLUCIÓN MOMENTÁNEA</option>
+                                <option value="ALMACÉN PICKING / ENTREGAS">ALMACÉN PICKING / ENTREGAS</option>
+                                <option value="REFACTURACIÓN">REFACTURACIÓN</option>
+                                <option value="ALMACEN PETROLEO">ALMACEN PETROLEO</option>
+                                <option value="ALMACÉN MERCADO LIBRE">ALMACÉN MERCADO LIBRE</option>
+                                <option value="ALMACEN SERVICIO TECNICO">ALMACEN SERVICIO TECNICO</option>
+                                <option value="ALMACÉN TRANSITORIO">ALMACÉN TRANSITORIO</option>
+                                <option value="M/GUARDAR">M/GUARDAR</option>
+                                <option value="EQUIPOS TECNOLÓGICOS">EQUIPOS TECNOLÓGICOS</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Bodega Destino</label>
-                            <select class="form-select" required>
-                                <option value="">Seleccionar bodega origen</option>
-                                <option value="1">ALMACEN CENTRAL</option>
-                                <option value="2">ALMACÉN ISS</option>
-                                <option value="3">PRODUCCIONES</option>
-                                <option value="4">ALMACÉN MERMA</option>
-                                <option value="5">ALMACEN P. INVENTARIO</option>
-                                <option value="6">ALMACEN MUESTRA</option>
-                                <option value="7">TRASPASOS MARSELLA/ASLAND</option>
-                                <option value="7">ALMACÉN ANTOFAGASTA</option>
-                                <option value="7">ALMACÉN INTERNO ANTOFAGASTA</option>
-                                <option value="7">INTERNACIONAL</option>
-                                <option value="7">ACLARACIÓN</option>
-                                <option value="7">DEVOLUCIÓN MOMENTÁNEA</option>
-                                <option value="7">ALMACÉN PICKING / ENTREGAS</option>
-                                <option value="7">REFACTURACIÓN</option>
-                                <option value="7">ALMACEN PETROLEO </option>
-                                <option value="7">ALMACÉN MERCADO LIBRE </option>
-                                <option value="7">ALMACEN SERVICIO TECNICO </option>
-                                <option value="7">ALMACÉN TRANSITORIO </option>
-                                <option value="7">M/GUARDAR </option>
-                                <option value="7">EQUIPOS TECNOLÓGICOS </option>
+                            <label class="form-label">Almacén Destino</label>
+                            <select class="form-select" name="destino" required>
+                                <option value="">Seleccionar bodega destino</option>
+                                <option value="ALMACEN CENTRAL">ALMACEN CENTRAL</option>
+                                <option value="ALMACÉN ISS">ALMACÉN ISS</option>
+                                <option value="PRODUCCIONES">PRODUCCIONES</option>
+                                <option value="ALMACÉN MERMA">ALMACÉN MERMA</option>
+                                <option value="ALMACEN P. INVENTARIO">ALMACEN P. INVENTARIO</option>
+                                <option value="ALMACEN MUESTRA">ALMACEN MUESTRA</option>
+                                <option value="TRASPASOS MARSELLA/ASLAND">TRASPASOS MARSELLA/ASLAND</option>
+                                <option value="ALMACÉN ANTOFAGASTA">ALMACÉN ANTOFAGASTA</option>
+                                <option value="ALMACÉN INTERNO ANTOFAGASTA">ALMACÉN INTERNO ANTOFAGASTA</option>
+                                <option value="INTERNACIONAL">INTERNACIONAL</option>
+                                <option value="ACLARACIÓN">ACLARACIÓN</option>
+                                <option value="DEVOLUCIÓN MOMENTÁNEA">DEVOLUCIÓN MOMENTÁNEA</option>
+                                <option value="ALMACÉN PICKING / ENTREGAS">ALMACÉN PICKING / ENTREGAS</option>
+                                <option value="REFACTURACIÓN">REFACTURACIÓN</option>
+                                <option value="ALMACEN PETROLEO">ALMACEN PETROLEO</option>
+                                <option value="ALMACÉN MERCADO LIBRE">ALMACÉN MERCADO LIBRE</option>
+                                <option value="ALMACEN SERVICIO TECNICO">ALMACEN SERVICIO TECNICO</option>
+                                <option value="ALMACÉN TRANSITORIO">ALMACÉN TRANSITORIO</option>
+                                <option value="M/GUARDAR">M/GUARDAR</option>
+                                <option value="EQUIPOS TECNOLÓGICOS">EQUIPOS TECNOLÓGICOS</option>
                             </select>
                         </div>
                     </div>
@@ -256,27 +333,31 @@
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <label class="form-label">Código Producto</label>
-                            <input type="text" class="form-control" placeholder="Ingrese código" required>
+                            <input type="text" name="producto" class="form-control" placeholder="Ingrese código" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Cantidad</label>
-                            <input type="number" class="form-control" min="1" required>
+                            <input type="number" name="cantidad" class="form-control" min="1" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Motivo</label>
-                            <select class="form-select" required>
+                            <select class="form-select" name="motivo" required>
                                 <option value="">Seleccionar motivo</option>
-                                <option value="1">Reposición</option>
-                                <option value="2">Reorganización</option>
-                                <option value="3">Inventario</option>
+                                <option value="Reposición">Reposición</option>
+                                <option value="Reorganización">Reorganización</option>
+                                <option value="Inventario">Inventario</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Almacén Destino</label>
-                            <input type="text" class="form-control" placeholder="Ej: Pasillo 3, Estante 2" required>
+                            <label class="form-label">Ubicacion almacén origen</label>
+                            <input type="text" name="ubicacion" class="form-control" placeholder="Ej: Pasillo 3, Estante 2" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Ubicacion almacén destino</label>
+                            <input type="text" name="ubicacionDestino" class="form-control" placeholder="Ej: Pasillo 3, Estante 2" required>
                         </div>
                     </div>
 
@@ -310,45 +391,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2023-07-20</td>
-                                <td>TRF001</td>
-                                <td>Bodega Principal</td>
-                                <td>Bodega Secundaria</td>
-                                <td>Pasillo 3, Estante 2</td>
-                                <td>Pasillo 1, Estante 4</td>
-                                <td>Martillo Stanley</td>
-                                <td>50</td>
-                                <td><span class="badge bg-success">Completada</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
-                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2023-07-19</td>
-                                <td>TRF002</td>
-                                <td>Bodega Secundaria</td>
-                                <td>Bodega de Reserva</td>
-                                <td>Pasillo 1, Estante 5</td>
-                                <td>Pasillo 2, Estante 3</td>
-                                <td>Tornillos 5mm</td>
-                                <td>1000</td>
-                                <td><span class="badge bg-warning">Pendiente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-info text-white"><i class="fas fa-eye"></i></button>
-                                    <button class="btn btn-sm btn-secondary"><i class="fas fa-print"></i></button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </main>
-
-<style>
-/* Dark Mode Styles */
+    </main><style>/* Dark Mode Styles */
 .dark-mode .dark-mode-card {
     background-color: #1a1a1a;
     border-color: #2d2d2d;
