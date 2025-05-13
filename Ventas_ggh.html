@@ -12,64 +12,92 @@
 
     <style>
         :root {
-            --color-fondo-gris: #1a1a1a;
-            --color-rojo-alerta: #ff4444;
+            --color-primario: #808080;
+            --color-secundario: #696969;
+            --color-acento: #696969;
+            --color-fondo: #F8F9FA;
+            --color-texto: #696969;
             --color-blanco: #FFFFFF;
-            --color-verde-promocion: #00C851;
-            --color-negro: #121212;
-            --color-gris-placeholder: #6c757d;
-            --color-card-dark: #242424;
-            --color-hover-dark: #2c2c2c;
+            --color-exito: #696969;
+            --color-card: #FFFFFF;
+            --color-hover: #E8E8E8;
         }
 
-        body.dark-mode {
-            background-color: var(--color-fondo-gris) !important;
-            color: var(--color-blanco) !important;
+        body {
+            background: linear-gradient(135deg, var(--color-fondo) 0%, var(--color-blanco) 100%);
+            color: var(--color-texto);
+            transition: all 0.4s ease;
+        }
+
+        .card {
+            background: var(--color-card);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #E0E0E0;
             transition: all 0.3s ease;
         }
 
-        .dark-mode .card {
-            background-color: var(--color-card-dark) !important;
-            color: var(--color-blanco) !important;
-            border: 1px solid var(--color-gris-placeholder) !important;
-        }
-
-        .dark-mode .form-control, .dark-mode .form-select {
-            background-color: var(--color-negro);
-            border-color: var(--color-gris-placeholder);
-            color: var(--color-blanco);
+        .form-control:focus, .form-select:focus {
+            border-color: var(--color-primario);
+            box-shadow: 0 0 0 0.2rem rgba(40,167,69,0.25);
         }
 
         .btn-primary {
-            background-color: var(--color-rojo-alerta);
-            border-color: var(--color-rojo-alerta);
+            background: linear-gradient(45deg, var(--color-primario), var(--color-secundario));
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #ff6666;
-            border-color: #ff6666;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(40,167,69,0.4);
         }
 
         .hidden {
             display: none;
         }
 
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
         .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #f2f2f2;
+            background-color: rgba(40,167,69,0.1);
         }
 
         .table-striped tbody tr:nth-of-type(even) {
-            background-color: #e6e6e6;
+            background-color: var(--color-blanco);
         }
 
         .table thead th {
-            background-color: var(--color-rojo-alerta);
-            color: white;
+            background: linear-gradient(45deg, var(--color-primario), var(--color-secundario));
+            color: var(--color-blanco);
+            border: none;
         }
 
         .table tbody tr.success {
-            background-color: var(--color-verde-promocion);
-            color: white;
+            background-color: var(--color-exito);
+            color: var(--color-blanco);
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(40,167,69,0.1);
         }
     </style>
 </head>
@@ -181,8 +209,8 @@
             </div>
             <div class="card-body">
                 <div class="btn-group mb-4" role="group">
-                    <button class="btn btn-success" onclick="mostrarFormulario('cotizacion')">Crear Cotización</button>
-                    <a href="orden_venta.html" class="btn btn-success">Crear Orden de Venta</a>
+                    <button class="btn btn-success me-2" style="border-radius: 5px; padding: 6px 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease; font-family: Arial; font-size: 14px;" onclick="mostrarFormulario('cotizacion')">Crear Cotización</button>
+                    <a href="orden_venta.html" class="btn btn-success" style="border-radius: 5px; padding: 6px 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease; font-family: Arial; font-size: 14px;">Crear Orden de Venta</a>
                 </div>
 
                 <div id="formCotizacion" class="hidden">
@@ -201,7 +229,7 @@
                             <input type="number" class="form-control" min="1">
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success">Generar Cotización</button>
+                            <button type="submit" class="btn btn-success" style="border-radius: 5px; padding: 6px 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease; font-family: Arial; font-size: 14px;">Generar Cotización</button>
                         </div>
                     </form>
                 </div>
@@ -222,14 +250,12 @@
                             <input type="number" class="form-control" min="1">
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success">Generar Orden de Venta</button>
+                            <button type="submit" class="btn btn-success" style="border-radius: 5px; padding: 6px 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.2); transition: all 0.3s ease; font-family: Arial; font-size: 14px;">Generar Orden de Venta</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </main>
-
+        </div>    </main>
     <footer class="bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="row">

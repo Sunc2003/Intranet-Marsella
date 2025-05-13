@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orden de Venta - Ferretería Marsella</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Librerías externas -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-fondo-gris: #2F2F2F;
+            --color-rojo-alerta: #D50000;
+            --color-blanco: #FFFFFF;
+            --color-verde-promocion: #007A33;
+            --color-negro: #000000;
+            --color-gris-placeholder: #BFBFBF;
+        }
+
+        body.dark-mode {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .card {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border: 1px solid var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .list-group-item {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border-color: var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .bg-white {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .text-dark {
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .breadcrumb-item a {
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .breadcrumb-item.active {
+            color: var(--color-gris-placeholder) !important;
+        }
+
+        .dark-mode .btn-outline-dark {
+            color: var(--color-blanco) !important;
+            border-color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .btn-outline-dark:hover {
+            background-color: var(--color-gris-placeholder) !important;
+            color: var(--color-blanco) !important;
+        }
+
+        .dark-mode .shadow {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .dark-mode footer.bg-dark {
+            background-color: var(--color-negro) !important;
+        }
+
+        header img {
+            width: auto;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .carousel .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .card.border-0 {
+            transition: transform 0.2s;
+        }
+
+        .card.border-0:hover {
+            transform: translateY(-5px);
+        }
+
+        .animate__animated {
+            animation-duration: 1s;
+        }
+    </style></head>
+
+<body class="bg-light">
+    <header class="container-fluid bg-white text-dark p-3 shadow">
+        <div class="d-flex justify-content-between align-items-center">
+            <img src="img/MARSELLA (2).png" alt="Logo Ferretería Marsella" style="width: auto; height: 60px; object-fit: contain;" class="rounded animate__animated animate__fadeIn">
+            <div>
+                <span class="me-3">Bienvenido/a: <strong id="userName">Millaray Esposito</strong></span>
+                <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn"><i class="fas fa-moon me-2"></i>Modo Noche</button>
+                <a href="logout.html" class="btn btn-danger ms-2">Cerrar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-4">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="text-dark"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Orden de Venta</li>
+            </ol>
+        </nav>
+
+        <h2 class="mb-4 text-dark">Orden de Venta</h2>
+        
+        <!-- Datos principales de la orden -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label>Cliente:</label>
+                    <input type="text" class="form-control" placeholder="Buscar cliente...">
+                </div>
+                <div class="mb-3">
+                    <label>Nombre:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Persona de contacto:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>OC / Ref:</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Moneda local:</label>
+                    <select class="form-control">
+                        <option>CLP</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label>N°:</label>
+                    <select class="form-control" id="numeroTipo" onchange="toggleNumeroInput()">
+                        <option value="primario">Primario</option>
+                        <option value="manual">Manual</option>
+                    </select>
+                    <input type="text" class="form-control mt-2" id="numeroManual" style="display: none;" placeholder="Ingrese número manual">
+                </div>
+                <div class="mb-3">
+                    <label>Estado:</label>
+                    <select class="form-control">
+                        <option>Abiertos</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Fecha de contabilización:</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Fecha de entrega:</label>
+                    <input type="date" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label>Fecha de documento:</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestañas -->
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <style>
+                    .nav-tabs {
+                        border-bottom: 2px solid #dee2e6;
+                    }
+                    .nav-tabs .nav-item {
+                        margin-bottom: -2px;
+                    }
+                    .nav-tabs .nav-link {
+                        border: none;
+                        color: #495057;
+                        padding: 12px 20px;
+                        font-weight: 500;
+                        transition: all 0.3s ease;
+                        position: relative;
+                    }
+                    .nav-tabs .nav-link:before {
+                        font-family: "Font Awesome 5 Free";
+                        margin-right: 5px;
+                        color: #495057;
+                    }
+                    .nav-tabs .nav-link[href="#contenido"]:before {
+                        content: '\f15c';
+                    }
+                    .nav-tabs .nav-link[href="#logistica"]:before {
+                        content: '\f0d1';
+                    }
+                    .nav-tabs .nav-link[href="#ventas"]:before {
+                        content: '\f155';
+                    }
+                    .nav-tabs .nav-link[href="#finanzas"]:before {
+                        content: '\f53d';
+                    }
+                    .nav-tabs .nav-link[href="#anexos"]:before {
+                        content: '\f0c6';
+                    }
+                    .nav-tabs .nav-link:hover {
+                        border: none;
+                        color: #dc3545;
+                    }
+                    .nav-tabs .nav-link:hover:before {
+                        color: #dc3545;
+                    }
+                    .nav-tabs .nav-link.active {
+                        color: #dc3545;
+                        background: transparent;
+                        border-bottom: 2px solid #dc3545;
+                    }
+                    .nav-tabs .nav-link.active:before {
+                        color: #dc3545;
+                    }
+                </style>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#contenido">Contenido</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#logistica">Logística</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#ventas">Ventas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#finanzas">Finanzas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#anexos">Anexos</a>
+                    </li>
+                </ul>                                <div class="tab-content mt-3" id="myTabContent">
+                    
+                    <!-- Contenido -->
+                    <div class="tab-pane fade show active" id="contenido">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Código">Código</th>
+                                        <th class="p-3" style="min-width: 350px; font-size: 0.9rem;" title="Descripción del artículo">Descripción del artículo</th>
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Almacén">Almacén A01</th>
+                                        <th class="p-3" style="min-width: 100px; font-size: 0.9rem;" title="Cant Vta">Cant Vta</th>
+                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Precio venta">Precio venta</th>
+                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Total (ML)">Total (ML)</th>
+                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Solicita compra">Solicita compra</th>
+                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Proveedor">Proveedor</th>
+                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Cantidad a comprar">Cantidad a comprar</th>
+                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Precio compra">Precio compra</th>
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Margen">Margen</th>
+                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Fecha solicitud">Fecha solicitud</th>
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="% comisión">% comisión</th>
+                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Plazo de entrega">Plazo de entrega</th>
+                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Status de picking">Status de picking</th>
+                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Almacén destino">Almacén destino</th>
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Cod. QBLI">Cod. QBLI</th>
+                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Valor QBLI">Valor QBLI</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="date" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Logística -->
+                    <div class="tab-pane fade" id="logistica">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Tipo orden:</label>
+                                    <select class="form-control">
+                                        <option>Entrega</option>
+                                        <option>Retiro</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Forma de pago:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Documento Despacho:</label>
+                                    <select class="form-control">
+                                        <option>Factura</option>
+                                        <option>Guía</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Módulo Destino -->
+                                <div class="mb-3">
+                                    <label>Destino:</label>
+                                    <div class="input-group">
+                                        <select class="form-control">
+                                            <option>Dirección 1</option>
+                                            <option>Dirección 2</option>
+                                        </select>
+                                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalDestino" data-bs-backdrop="static">...</button>
+                                    </div>
+                                </div>
+
+                                <!-- Módulo Destinatario de factura -->
+                                <div class="mb-3">
+                                    <label>Destinatario de factura:</label>
+                                    <div class="input-group">
+                                        <select class="form-control">
+                                            <option>Facturación 1</option>
+                                            <option>Facturación 2</option>
+                                        </select>
+                                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalFacturacion" data-bs-backdrop="static">...</button>
+                                    </div>
+                                </div>
+
+                                <!-- Módulo Transporte -->
+                                <div class="mb-3">
+                                    <label>Transporte:</label>
+                                    <div class="input-group">
+                                        <select class="form-control">
+                                            <option>Transporte 1</option>
+                                            <option>Transporte 2</option>
+                                        </select>
+                                        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalTransporte" data-bs-backdrop="static">...</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Destino -->
+                    <div class="modal fade" id="modalDestino" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Detalles de Dirección</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
+                                        <tr><td>Número de la calle:</td><td></td></tr>
+                                        <tr><td>Colonia:</td><td></td></tr>
+                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
+                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
+                                        <tr><td>País/Región:</td><td>Chile</td></tr>
+                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
+                                        <tr><td>Correo:</td><td></td></tr>
+                                        <tr><td>Correo 2:</td><td></td></tr>
+                                        <tr><td>GLN:</td><td></td></tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Facturación -->
+                    <div class="modal fade" id="modalFacturacion" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Detalles de Facturación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
+                                        <tr><td>Número de la calle:</td><td></td></tr>
+                                        <tr><td>Colonia:</td><td></td></tr>
+                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
+                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
+                                        <tr><td>País/Región:</td><td>Chile</td></tr>
+                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
+                                        <tr><td>Correo:</td><td></td></tr>
+                                        <tr><td>Correo 2:</td><td></td></tr>
+                                        <tr><td>GLN:</td><td></td></tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Transporte -->
+                    <div class="modal fade" id="modalTransporte" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Detalles de Transporte</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
+                                        <tr><td>Número de la calle:</td><td></td></tr>
+                                        <tr><td>Colonia:</td><td></td></tr>
+                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
+                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
+                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
+                                        <tr><td>País/Región:</td><td>Chile</td></tr>
+                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
+                                        <tr><td>Correo:</td><td></td></tr>
+                                        <tr><td>Correo 2:</td><td></td></tr>
+                                        <tr><td>GLN:</td><td></td></tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ventas -->
+                    <style>
+                        .tab-pane {
+                            padding: 20px;
+                            background-color: #ffffff;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        }
+
+                        .row {
+                            margin-bottom: 20px;
+                        }
+
+                        .mb-3 {
+                            margin-bottom: 1.5rem !important;
+                        }
+
+                        label {
+                            font-weight: 600;
+                            color: #333;
+                            margin-bottom: 0.5rem;
+                            display: block;
+                        }
+
+                        .form-control {
+                            border: 1px solid #ddd;
+                            border-radius: 4px;
+                            padding: 0.5rem 0.75rem;
+                            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                        }
+
+                        .form-control:focus {
+                            border-color: #80bdff;
+                            outline: 0;
+                            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+                        }
+
+                        select.form-control {
+                            cursor: pointer;
+                            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+                            background-repeat: no-repeat;
+                            background-position: right 0.75rem center;
+                            background-size: 16px 12px;
+                            padding-right: 2rem;
+                        }
+
+                        input[type="date"].form-control {
+                            min-height: 38px;
+                        }
+
+                        .d-flex {
+                            gap: 1rem;
+                        }
+
+                        .me-3 {
+                            margin-right: 1rem !important;
+                        }
+
+                        /* Estado Packing styles */
+                        .d-flex label:last-child {
+                            background-color: #ffc107;
+                            padding: 0.5rem 1rem;
+                            border-radius: 4px;
+                            color: #000;
+                            margin-top: 2rem;
+                        }
+                    </style>
+                    <div class="tab-pane fade" id="ventas">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label>Tipo orden:</label>
+                                    <select class="form-control">
+                                        <option>Seleccionar</option>
+                                        <option>Entrega - Entrega</option>
+                                        <option>Reserva - Reserva</option>
+                                        <option>Solo traslado - Solo traslado</option>
+                                        <option>Solo traslado con ajuste de stock - Solo traslado con ajuste de stock</option>
+                                        <option>En espera de OC - En espera de OC</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Forma de pago:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Documento Despacho:</label>
+                                    <select class="form-control">
+                                        <option>Seleccionar</option>
+                                        <option>Factura - Factura</option>
+                                        <option>Guía despacho - Guía despacho </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label>FE tipo de doc de Ref 1:</label>
+                                    <select class="form-control">
+                                        <option>Seleccionar</option>
+                                        <option value="30">30 - Factura</option>
+                                        <option value="32">32 - Factura exenta de IVA</option>
+                                        <option value="33">33 - Factura electrónica</option>
+                                        <option value="34">34 - Factura exenta electrónica</option>
+                                        <option value="35">35 - Boleta</option>
+                                        <option value="38">38 - Boleta exenta</option>
+                                        <option value="39">39 - Boleta electrónica</option>
+                                        <option value="41">41 - Boleta exenta electrónica</option>
+                                        <option value="45">45 - Factura de compra</option>
+                                        <option value="46">46 - Factura de compra electrónica</option>
+                                        <option value="50">50 - Guía de despacho</option>
+                                        <option value="52">52 - Guía de despacho electónica</option>
+                                        <option value="55">55 - Nota de débito</option>
+                                        <option value="56">56 - Nota de débito electrónica</option>
+                                        <option value="60">60 - Nota de crédito</option>
+                                        <option value="61">61 - Nota de crédito electrónica</option>
+                                        <option value="801">801 - Orden de Compra</option>
+                                        <option value="802">802 - Nota de Pedido</option>
+                                        <option value="803">803 - Contrato</option>
+                                        <option value="804">804 - Resolución</option>
+                                        <option value="805">805 - Proceso Chile Compra</option>
+                                        <option value="806">806 - Ficha Chile Compra</option>
+                                        <option value="999">999 - CHEQUE</option>
+                                        <option value="A">A - TRANSFERENCIA ELECTRONICA</option>
+                                        <option value="B">B - DEPOSITO BANCARIO</option>
+                                        <option value="CONT">CONT - EFECTIVO</option>
+                                        <option value="DEB">DEB - Tarjeta de débito</option>
+                                        <option value="HES">HES - Hoja de Entrada de Servicios</option>
+                                        <option value="MIG">MIG - MIGO</option>
+                                        <option value="MIGO">MIGO - MIGO2</option>
+                                    </select>                                </div>
+                                <div class="mb-3">
+                                    <label>Valor flete estimado:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Flete pagado por:</label>
+                                    <select class="form-control">
+                                        <option>Seleccionar</option>
+                                        <option>GGH - GGH</option>
+                                        <option>Cliente - Cliente</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label>FE fecha Ref 1:</label>
+                                    <input type="date" class="form-control">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="mb-3 d-flex">
+                                    <div class="me-3">
+                                        <label>Fecha de entrega:</label>
+                                        <input type="date" class="form-control">
+                                    </div>
+                                    <div>
+                                        <label>Estado: Packing</label>
+                                      
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Correo de cliente:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label>Tipo de despacho:</label>
+                                    <select class="form-control">
+                                        <option>Seleccionar</option>
+                                        <option>GGH - GGH</option>
+                                        <option>Retira cliente - Retira cliente</option>
+                                        <option>Agenda - Agenda</option>
+                                        <option>Transporte externo - Transporte externo </option>
+                                        <option>Calibración - Calibración </option>
+                                        <option>Sin OC - Sin OC </option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Centro de costo:</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    <!-- Finanzas -->
+                    <div class="tab-pane fade" id="finanzas">
+                        <p>Contenido de Finanzas (En desarrollo)</p>
+                    </div>
+
+                    <!-- Anexos -->
+                    <div class="tab-pane fade" id="anexos">
+                        <p>Contenido de Anexos (En desarrollo)</p>
+                    </div>
+                </div>
+            </div>
+            </div>    
+        
+        <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label>Empleado de ventas:</label>
+                                            <select class="form-control">
+                                                <option>Seleccionar</option>
+                                                <option>Vendedora - Grecia Castro</option>
+                                                <option>Vendedora - Paola Rvera </option>
+
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Propietario:</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Comentarios:</label>
+                                            <textarea class="form-control" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </main>
+
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="border-bottom pb-2">Ferretería Marsella</h5>
+                    <p class="small">Sistema Integrado de Gestión de Bodega</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode);
+        
+        // Actualizar el texto del botón
+        const darkModeBtn = document.getElementById('darkModeBtn');
+        if (isDarkMode) {
+            darkModeBtn.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+        } else {
+            darkModeBtn.innerHTML = '<i class="fas fa-moon me-2"></i>Modo Noche';
+        }
+    }
+
+    // Verificar preferencia guardada al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) {
+            toggleDarkMode();
+        }
+    });
