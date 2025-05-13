@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden de Venta - Ferretería Marsella</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Librerías externas -->
@@ -13,94 +13,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-/* Variables */
-:root {
-    --color-fondo-gris: #2F2F2F;
-    --color-rojo-alerta: #D50000;
-    --color-blanco: #FFFFFF;
-    --color-verde-promocion: #007A33;
-    --color-negro: #000000;
-    --color-gris-placeholder: #BFBFBF;
-}
+        /* Variables */
+        :root {
+            --color-fondo-gris: #2F2F2F;
+            --color-rojo-alerta: #D50000;
+            --color-blanco: #FFFFFF;
+            --color-verde-promocion: #007A33;
+            --color-negro: #000000;
+            --color-gris-placeholder: #BFBFBF;
+        }
 
-/* Modo Oscuro Global */
-body.dark-mode {
-    background-color: var(--color-fondo-gris) !important;
-    color: var(--color-blanco) !important;
-}
+        /* Modo Oscuro Global */
+        body.dark-mode {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
 
-.dark-mode .card {
-    background-color: var(--color-negro) !important;
-    color: var(--color-blanco) !important;
-    border: 1px solid var(--color-gris-placeholder) !important;
-}
+        .dark-mode .card {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border: 1px solid var(--color-gris-placeholder) !important;
+        }
 
-.dark-mode .list-group-item {
-    background-color: var(--color-negro) !important;
-    color: var(--color-blanco) !important;
-    border-color: var(--color-gris-placeholder) !important;
-}
+        .dark-mode .list-group-item {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+            border-color: var(--color-gris-placeholder) !important;
+        }
 
-.dark-mode .bg-white {
-    background-color: var(--color-fondo-gris) !important;
-    color: var(--color-blanco) !important;
-}
+        .dark-mode .bg-white {
+            background-color: var(--color-fondo-gris) !important;
+            color: var(--color-blanco) !important;
+        }
 
-.dark-mode .text-dark {
-    color: var(--color-blanco) !important;
-}
+        .dark-mode .text-dark {
+            color: var(--color-blanco) !important;
+        }
 
-.dark-mode .breadcrumb-item a {
-    color: var(--color-blanco) !important;
-}
+        .dark-mode .breadcrumb-item a {
+            color: var(--color-blanco) !important;
+        }
 
-.dark-mode .breadcrumb-item.active {
-    color: var(--color-gris-placeholder) !important;
-}
+        .dark-mode .breadcrumb-item.active {
+            color: var(--color-gris-placeholder) !important;
+        }
 
-.dark-mode .btn-outline-dark {
-    color: var(--color-blanco) !important;
-    border-color: var(--color-blanco) !important;
-}
+        .dark-mode .btn-outline-dark {
+            color: var(--color-blanco) !important;
+            border-color: var(--color-blanco) !important;
+        }
 
-.dark-mode .btn-outline-dark:hover {
-    background-color: var(--color-gris-placeholder) !important;
-    color: var(--color-blanco) !important;
-}
+        .dark-mode .btn-outline-dark:hover {
+            background-color: var(--color-gris-placeholder) !important;
+            color: var(--color-blanco) !important;
+        }
 
-.dark-mode .shadow {
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
-}
+        .dark-mode .shadow {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+        }
 
-.dark-mode footer.bg-dark {
-    background-color: var(--color-negro) !important;
-}
+        .dark-mode footer.bg-dark {
+            background-color: var(--color-negro) !important;
+        }
 
-/* Header & Carrusel */
-header img {
-    width: auto;
-    height: 60px;
-    object-fit: contain;
-}
+        /* Header & Carrusel */
+        header img {
+            width: auto;
+            height: 60px;
+            object-fit: contain;
+        }
 
-.carousel .carousel-item img {
-    height: 400px;
-    object-fit: cover;
-}
+        .carousel .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
 
-/* Cards animadas */
-.card.border-0 {
-    transition: transform 0.2s;
-}
+        /* Cards animadas */
+        .card.border-0 {
+            transition: transform 0.2s;
+        }
 
-.card.border-0:hover {
-    transform: translateY(-5px);
-}
+        .card.border-0:hover {
+            transform: translateY(-5px);
+        }
 
-.animate__animated {
-    animation-duration: 1s;
-}
+        .animate__animated {
+            animation-duration: 1s;
+        }
 
+        /* Asegurarse de que el modal se vea correctamente en modo oscuro */
+        .dark-mode .modal-content {
+            background-color: var(--color-negro) !important;
+            color: var(--color-blanco) !important;
+        }
     </style>
     </head>
 
@@ -306,7 +311,7 @@ header img {
                         </div>
                     </div>
 
-  <!-- Logística -->
+<!-- Logística -->
 <div class="tab-pane fade show active" id="logistica">
     <div class="row">
         <div class="col-md-12">
@@ -319,7 +324,7 @@ header img {
                         <option>Dirección 2</option>
                     </select>
                     <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección" style="background-color: #f8f9fa;">
-                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDestino" data-bs-backdrop="static">...</button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionDestino" data-bs-backdrop="static">...</button>
                 </div>
             </div>
 
@@ -332,12 +337,71 @@ header img {
                         <option>Facturación 2</option>
                     </select>
                     <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección " style="background-color: #f8f9fa;">
-                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalFacturacion" data-bs-backdrop="static">...</button>
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionFacturacion" data-bs-backdrop="static">...</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Destino -->
+<div class="modal fade" id="modalDireccionDestino" tabindex="-1" aria-labelledby="modalDireccionDestinoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDireccionDestinoLabel">Dirección del Destino</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de dirección -->
+        <form>
+          <div class="mb-3">
+            <label for="calleDestino" class="form-label">Calle/Apartado de correos</label>
+            <input type="text" class="form-control border-secondary" id="calleDestino" placeholder="Escribir aquí">
+          </div>
+          <div class="mb-3">
+            <label for="numeroCalleDestino" class="form-label">Número de la calle</label>
+            <input type="text" class="form-control border-secondary" id="numeroCalleDestino" placeholder="Escribir aquí">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Facturación -->
+<div class="modal fade" id="modalDireccionFacturacion" tabindex="-1" aria-labelledby="modalDireccionFacturacionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDireccionFacturacionLabel">Dirección del Destinatario de Factura</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de dirección de facturación -->
+        <form>
+          <div class="mb-3">
+            <label for="calleFacturacion" class="form-label">Calle/Apartado de correos</label>
+            <input type="text" class="form-control border-secondary" id="calleFacturacion" placeholder="Escribir aquí">
+          </div>
+          <div class="mb-3">
+            <label for="numeroCalleFacturacion" class="form-label">Número de la calle</label>
+            <input type="text" class="form-control border-secondary" id="numeroCalleFacturacion" placeholder="Escribir aquí">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-danger">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
                     <!-- Ventas -->
                     <style>
@@ -574,6 +638,7 @@ header img {
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
