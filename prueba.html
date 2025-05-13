@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - Ferretería Marsella</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Logística -->
+    <div class="tab-pane fade show active" id="logistica">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Módulo Destino -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-danger">Destino</label>
+                    <div class="input-group">
+                        <select class="form-select border-secondary" style="background-color: #f8f9fa;">
+                            <option>Dirección 1</option>
+                            <option>Dirección 2</option>
+                        </select>
+                        <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección" style="background-color: #f8f9fa;">
+                        <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionDestino" data-bs-backdrop="static">...</button>
+                    </div>
+                </div>
+
+                <!-- Módulo Destinatario de Factura -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-danger">Destinatario de factura</label>
+                    <div class="input-group">
+                        <select class="form-select border-secondary" style="background-color: #f8f9fa;">
+                            <option>Facturación 1</option>
+                            <option>Facturación 2</option>
+                        </select>
+                        <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección " style="background-color: #f8f9fa;">
+                        <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionFacturacion" data-bs-backdrop="static">...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Destino -->
+    <div class="modal fade" id="modalDireccionDestino" tabindex="-1" aria-labelledby="modalDireccionDestinoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDireccionDestinoLabel">Dirección del Destino</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de dirección -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="calleDestino" class="form-label">Calle/Apartado de correos</label>
+                            <input type="text" class="form-control border-secondary" id="calleDestino" placeholder="Escribir aquí">
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroCalleDestino" class="form-label">Número de la calle</label>
+                            <input type="text" class="form-control border-secondary" id="numeroCalleDestino" placeholder="Escribir aquí">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Facturación -->
+    <div class="modal fade" id="modalDireccionFacturacion" tabindex="-1" aria-labelledby="modalDireccionFacturacionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalDireccionFacturacionLabel">Dirección del Destinatario de Factura</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de dirección de facturación -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="calleFacturacion" class="form-label">Calle/Apartado de correos</label>
+                            <input type="text" class="form-control border-secondary" id="calleFacturacion" placeholder="Escribir aquí">
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroCalleFacturacion" class="form-label">Número de la calle</label>
+                            <input type="text" class="form-control border-secondary" id="numeroCalleFacturacion" placeholder="Escribir aquí">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
