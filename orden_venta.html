@@ -13,159 +13,96 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-            /* Fondo general del modal */
-    .modal-content {
-        background-color: #2c2c2c; /* Plomo oscuro */
-        color: #f1f1f1;
-        border-radius: 10px;
-        border: 2px solid #c62828; /* Rojo elegante */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    }
+/* Variables */
+:root {
+    --color-fondo-gris: #2F2F2F;
+    --color-rojo-alerta: #D50000;
+    --color-blanco: #FFFFFF;
+    --color-verde-promocion: #007A33;
+    --color-negro: #000000;
+    --color-gris-placeholder: #BFBFBF;
+}
 
-    /* Encabezado del modal */
-    .modal-header {
-        background-color: #b71c1c; /* Rojo oscuro */
-        color: #fff;
-        border-bottom: 2px solid #c62828;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-    }
+/* Modo Oscuro Global */
+body.dark-mode {
+    background-color: var(--color-fondo-gris) !important;
+    color: var(--color-blanco) !important;
+}
 
-    .modal-title {
-        font-weight: bold;
-        font-size: 20px;
-    }
+.dark-mode .card {
+    background-color: var(--color-negro) !important;
+    color: var(--color-blanco) !important;
+    border: 1px solid var(--color-gris-placeholder) !important;
+}
 
-    /* Botón cerrar */
-    .btn-close {
-        filter: invert(1);
-    }
+.dark-mode .list-group-item {
+    background-color: var(--color-negro) !important;
+    color: var(--color-blanco) !important;
+    border-color: var(--color-gris-placeholder) !important;
+}
 
-    /* Tabla */
-    .modal-body .table {
-        color: #f1f1f1;
-        border-color: #c62828;
-    }
+.dark-mode .bg-white {
+    background-color: var(--color-fondo-gris) !important;
+    color: var(--color-blanco) !important;
+}
 
-    .modal-body .table td {
-        border: 1px solid #555;
-        background-color: #333;
-    }
+.dark-mode .text-dark {
+    color: var(--color-blanco) !important;
+}
 
-    /* Footer */
-    .modal-footer {
-        background-color: #1e1e1e;
-        border-top: 2px solid #c62828;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
+.dark-mode .breadcrumb-item a {
+    color: var(--color-blanco) !important;
+}
 
-    /* Botones */
-    .modal-footer .btn-secondary {
-        background-color: #757575;
-        border: none;
-        color: #fff;
-        transition: background-color 0.3s;
-    }
+.dark-mode .breadcrumb-item.active {
+    color: var(--color-gris-placeholder) !important;
+}
 
-    .modal-footer .btn-secondary:hover {
-        background-color: #616161;
-    }
+.dark-mode .btn-outline-dark {
+    color: var(--color-blanco) !important;
+    border-color: var(--color-blanco) !important;
+}
 
-    .modal-footer .btn-primary {
-        background-color: #d32f2f;
-        border: none;
-        color: #fff;
-        transition: background-color 0.3s;
-    }
+.dark-mode .btn-outline-dark:hover {
+    background-color: var(--color-gris-placeholder) !important;
+    color: var(--color-blanco) !important;
+}
 
-    .modal-footer .btn-primary:hover {
-        background-color: #b71c1c;
-    }
-        :root {
-            --color-fondo-gris: #2F2F2F;
-            --color-rojo-alerta: #D50000;
-            --color-blanco: #FFFFFF;
-            --color-verde-promocion: #007A33;
-            --color-negro: #000000;
-            --color-gris-placeholder: #BFBFBF;
-        }
+.dark-mode .shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
 
-        body.dark-mode {
-            background-color: var(--color-fondo-gris) !important;
-            color: var(--color-blanco) !important;
-        }
+.dark-mode footer.bg-dark {
+    background-color: var(--color-negro) !important;
+}
 
-        .dark-mode .card {
-            background-color: var(--color-negro) !important;
-            color: var(--color-blanco) !important;
-            border: 1px solid var(--color-gris-placeholder) !important;
-        }
+/* Header & Carrusel */
+header img {
+    width: auto;
+    height: 60px;
+    object-fit: contain;
+}
 
-        .dark-mode .list-group-item {
-            background-color: var(--color-negro) !important;
-            color: var(--color-blanco) !important;
-            border-color: var(--color-gris-placeholder) !important;
-        }
+.carousel .carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
 
-        .dark-mode .bg-white {
-            background-color: var(--color-fondo-gris) !important;
-            color: var(--color-blanco) !important;
-        }
+/* Cards animadas */
+.card.border-0 {
+    transition: transform 0.2s;
+}
 
-        .dark-mode .text-dark {
-            color: var(--color-blanco) !important;
-        }
+.card.border-0:hover {
+    transform: translateY(-5px);
+}
 
-        .dark-mode .breadcrumb-item a {
-            color: var(--color-blanco) !important;
-        }
+.animate__animated {
+    animation-duration: 1s;
+}
 
-        .dark-mode .breadcrumb-item.active {
-            color: var(--color-gris-placeholder) !important;
-        }
-
-        .dark-mode .btn-outline-dark {
-            color: var(--color-blanco) !important;
-            border-color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .btn-outline-dark:hover {
-            background-color: var(--color-gris-placeholder) !important;
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .shadow {
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .dark-mode footer.bg-dark {
-            background-color: var(--color-negro) !important;
-        }
-
-        header img {
-            width: auto;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .carousel .carousel-item img {
-            height: 400px;
-            object-fit: cover;
-        }
-
-        .card.border-0 {
-            transition: transform 0.2s;
-        }
-
-        .card.border-0:hover {
-            transform: translateY(-5px);
-        }
-
-        .animate__animated {
-            animation-duration: 1s;
-        }
-    </style></head>
+    </style>
+    </head>
 
 <body class="bg-light">
     <header class="container-fluid bg-white text-dark p-3 shadow">
@@ -369,135 +306,38 @@
                         </div>
                     </div>
 
-                    <!-- Logística -->
-                    <div class="tab-pane fade" id="logistica">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Módulo Destino -->
-                            <div class="mb-4">
-                                <label class="form-label fw-bold text-danger">Destino</label>
-                                <div class="input-group">
-                                    <select class="form-select border-secondary" style="background-color: #f8f9fa;">
-                                        <option>Dirección 1</option>
-                                        <option>Dirección 2</option>
-                                    </select>
-                                    <input type="text" class="form-control border-secondary" placeholder="Detalles del destino" style="background-color: #f8f9fa;">
-                                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDestino" data-bs-backdrop="static">...</button>
-                                </div>
-                            </div>
-
-                            <!-- Módulo Destinatario de Factura -->
-                            <div class="mb-4">
-                                <label class="form-label fw-bold text-danger">Destinatario de factura</label>
-                                <div class="input-group">
-                                    <select class="form-select border-secondary" style="background-color: #f8f9fa;">
-                                        <option>Facturación 1</option>
-                                        <option>Facturación 2</option>
-                                    </select>
-                                    <input type="text" class="form-control border-secondary" placeholder="Detalles de facturación" style="background-color: #f8f9fa;">
-                                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalFacturacion" data-bs-backdrop="static">...</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <!-- Logística -->
+<div class="tab-pane fade show active" id="logistica">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Módulo Destino -->
+            <div class="mb-4">
+                <label class="form-label fw-bold text-danger">Destino</label>
+                <div class="input-group">
+                    <select class="form-select border-secondary" style="background-color: #f8f9fa;">
+                        <option>Dirección 1</option>
+                        <option>Dirección 2</option>
+                    </select>
+                    <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección" style="background-color: #f8f9fa;">
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDestino" data-bs-backdrop="static">...</button>
                 </div>
+            </div>
 
-
-                    <!-- Modal Destino -->
-                    <div class="modal fade" id="modalDestino" tabindex="-1">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Detalles de Dirección</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
-                                        <tr><td>Número de la calle:</td><td></td></tr>
-                                        <tr><td>Colonia:</td><td></td></tr>
-                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
-                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
-                                        <tr><td>País/Región:</td><td>Chile</td></tr>
-                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
-                                        <tr><td>Correo:</td><td></td></tr>
-                                        <tr><td>Correo 2:</td><td></td></tr>
-                                        <tr><td>GLN:</td><td></td></tr>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">OK</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Facturación -->
-                    <div class="modal fade" id="modalFacturacion" tabindex="-1">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Detalles de Facturación</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
-                                        <tr><td>Número de la calle:</td><td></td></tr>
-                                        <tr><td>Colonia:</td><td></td></tr>
-                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
-                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
-                                        <tr><td>País/Región:</td><td>Chile</td></tr>
-                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
-                                        <tr><td>Correo:</td><td></td></tr>
-                                        <tr><td>Correo 2:</td><td></td></tr>
-                                        <tr><td>GLN:</td><td></td></tr>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">OK</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal Transporte -->
-                    <div class="modal fade" id="modalTransporte" tabindex="-1">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Detalles de Transporte</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <tr><td>Calle/Apartado de correos:</td><td>PARAMERICANA NORTE #5001</td></tr>
-                                        <tr><td>Número de la calle:</td><td></td></tr>
-                                        <tr><td>Colonia:</td><td></td></tr>
-                                        <tr><td>Ciudad:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Zonas:</td><td>ZONA 1</td></tr>
-                                        <tr><td>Comuna:</td><td>CONCHALI</td></tr>
-                                        <tr><td>Departamento:</td><td>Región Metropolitana de Santiago</td></tr>
-                                        <tr><td>País/Región:</td><td>Chile</td></tr>
-                                        <tr><td>Edificio/Planta/Sala:</td><td></td></tr>
-                                        <tr><td>Correo:</td><td></td></tr>
-                                        <tr><td>Correo 2:</td><td></td></tr>
-                                        <tr><td>GLN:</td><td></td></tr>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">OK</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Módulo Destinatario de Factura -->
+            <div class="mb-4">
+                <label class="form-label fw-bold text-danger">Destinatario de factura</label>
+                <div class="input-group">
+                    <select class="form-select border-secondary" style="background-color: #f8f9fa;">
+                        <option>Facturación 1</option>
+                        <option>Facturación 2</option>
+                    </select>
+                    <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección " style="background-color: #f8f9fa;">
+                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalFacturacion" data-bs-backdrop="static">...</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
                     <!-- Ventas -->
                     <style>
