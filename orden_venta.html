@@ -12,102 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        /* Variables */
-        :root {
-            --color-fondo-gris: #2F2F2F;
-            --color-rojo-alerta: #D50000;
-            --color-blanco: #FFFFFF;
-            --color-verde-promocion: #007A33;
-            --color-negro: #000000;
-            --color-gris-placeholder: #BFBFBF;
-        }
 
-        /* Modo Oscuro Global */
-        body.dark-mode {
-            background-color: var(--color-fondo-gris) !important;
-            color: var(--color-blanco) !important;
-        }
+<style>
 
-        .dark-mode .card {
-            background-color: var(--color-negro) !important;
-            color: var(--color-blanco) !important;
-            border: 1px solid var(--color-gris-placeholder) !important;
-        }
-
-        .dark-mode .list-group-item {
-            background-color: var(--color-negro) !important;
-            color: var(--color-blanco) !important;
-            border-color: var(--color-gris-placeholder) !important;
-        }
-
-        .dark-mode .bg-white {
-            background-color: var(--color-fondo-gris) !important;
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .text-dark {
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .breadcrumb-item a {
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .breadcrumb-item.active {
-            color: var(--color-gris-placeholder) !important;
-        }
-
-        .dark-mode .btn-outline-dark {
-            color: var(--color-blanco) !important;
-            border-color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .btn-outline-dark:hover {
-            background-color: var(--color-gris-placeholder) !important;
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode .shadow {
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .dark-mode footer.bg-dark {
-            background-color: var(--color-negro) !important;
-        }
-
-        /* Header & Carrusel */
-        header img {
-            width: auto;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .carousel .carousel-item img {
-            height: 400px;
-            object-fit: cover;
-        }
-
-        /* Cards animadas */
-        .card.border-0 {
-            transition: transform 0.2s;
-        }
-
-        .card.border-0:hover {
-            transform: translateY(-5px);
-        }
-
-        .animate__animated {
-            animation-duration: 1s;
-        }
-
-        /* Asegurarse de que el modal se vea correctamente en modo oscuro */
-        .dark-mode .modal-content {
-            background-color: var(--color-negro) !important;
-            color: var(--color-blanco) !important;
-        }
-    </style>
-    </head>
+</style>
+</head>
 
 <body class="bg-light">
     <header class="container-fluid bg-white text-dark p-3 shadow">
@@ -323,86 +232,62 @@
                         <option>Dirección 1</option>
                         <option>Dirección 2</option>
                     </select>
-                    <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección" style="background-color: #f8f9fa;">
-                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionDestino" data-bs-backdrop="static">...</button>
+                    <input type="text" class="form-control border-secondary" placeholder="PDQ IQUIQUE, CHILE" value="PDQ IQUIQUE, CHILE" style="background-color: #f8f9fa;" readonly>
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalEditarDireccion">Editar</button>
                 </div>
             </div>
 
             <!-- Módulo Destinatario de Factura -->
             <div class="mb-4">
-                <label class="form-label fw-bold text-danger">Destinatario de factura</label>
+                <label class="form-label fw-bold text-danger">Destinatario de Factura</label>
                 <div class="input-group">
                     <select class="form-select border-secondary" style="background-color: #f8f9fa;">
-                        <option>Facturación 1</option>
-                        <option>Facturación 2</option>
+                        <option>Dirección 1</option>
+                        <option>Dirección 2</option>
                     </select>
-                    <input type="text" class="form-control border-secondary" placeholder="Componentes de dirección " style="background-color: #f8f9fa;">
-                    <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalDireccionFacturacion" data-bs-backdrop="static">...</button>
+                    <input type="text" class="form-control border-secondary" placeholder="PDQ IQUIQUE, CHILE" value="PDQ IQUIQUE, CHILE" style="background-color: #f8f9fa;" readonly>
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#modalEditarDireccion">Editar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal Destino -->
-<div class="modal fade" id="modalDireccionDestino" tabindex="-1" aria-labelledby="modalDireccionDestinoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDireccionDestinoLabel">Dirección del Destino</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario de dirección -->
-        <form>
-          <div class="mb-3">
-            <label for="calleDestino" class="form-label">Calle/Apartado de correos</label>
-            <input type="text" class="form-control border-secondary" id="calleDestino" placeholder="Escribir aquí">
-          </div>
-          <div class="mb-3">
-            <label for="numeroCalleDestino" class="form-label">Número de la calle</label>
-            <input type="text" class="form-control border-secondary" id="numeroCalleDestino" placeholder="Escribir aquí">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-danger">Guardar</button>
-      </div>
+<!-- Modal para editar dirección -->
+<div class="modal fade" id="modalEditarDireccion" tabindex="-1" aria-labelledby="modalEditarDireccionLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarDireccionLabel">Editar Dirección</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="direccionInput" class="form-label">Dirección:</label>
+                <input type="text" id="direccionInput" class="form-control" value="PDQ IQUIQUE, CHILE">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarDireccion()">Guardar</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- Modal Facturación -->
-<div class="modal fade" id="modalDireccionFacturacion" tabindex="-1" aria-labelledby="modalDireccionFacturacionLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDireccionFacturacionLabel">Dirección del Destinatario de Factura</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario de dirección de facturación -->
-        <form>
-          <div class="mb-3">
-            <label for="calleFacturacion" class="form-label">Calle/Apartado de correos</label>
-            <input type="text" class="form-control border-secondary" id="calleFacturacion" placeholder="Escribir aquí">
-          </div>
-          <div class="mb-3">
-            <label for="numeroCalleFacturacion" class="form-label">Número de la calle</label>
-            <input type="text" class="form-control border-secondary" id="numeroCalleFacturacion" placeholder="Escribir aquí">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-danger">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
+<script>
+    function guardarDireccion() {
+        const nuevaDireccion = document.getElementById('direccionInput').value;
+        const inputsDireccion = document.querySelectorAll('input[placeholder="PDQ IQUIQUE, CHILE"]');
+        
+        // Actualizar todos los campos de dirección con el nuevo valor
+        inputsDireccion.forEach(input => {
+            input.value = nuevaDireccion;
+        });
 
-
+        // Cerrar el modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalEditarDireccion'));
+        modal.hide();
+    }
+</script>
                     <!-- Ventas -->
                     <style>
                         .tab-pane {
