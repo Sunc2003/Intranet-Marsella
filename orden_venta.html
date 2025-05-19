@@ -183,57 +183,114 @@
                     </li>
                 </ul>                                <div class="tab-content mt-3" id="myTabContent">
                     
-                    <!-- Contenido -->
-                    <div class="tab-pane fade show active" id="contenido">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover">
-                                <thead>
-                                    <tr class="bg-light">
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Código">Código</th>
-                                        <th class="p-3" style="min-width: 350px; font-size: 0.9rem;" title="Descripción del artículo">Descripción del artículo</th>
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Almacén">Almacén A01</th>
-                                        <th class="p-3" style="min-width: 100px; font-size: 0.9rem;" title="Cant Vta">Cant Vta</th>
-                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Precio venta">Precio venta</th>
-                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Total (ML)">Total (ML)</th>
-                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Solicita compra">Solicita compra</th>
-                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Proveedor">Proveedor</th>
-                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Cantidad a comprar">Cantidad a comprar</th>
-                                        <th class="p-3" style="min-width: 170px; font-size: 0.9rem;" title="Precio compra">Precio compra</th>
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Margen">Margen</th>
-                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Fecha solicitud">Fecha solicitud</th>
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="% comisión">% comisión</th>
-                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Plazo de entrega">Plazo de entrega</th>
-                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Status de picking">Status de picking</th>
-                                        <th class="p-3" style="min-width: 200px; font-size: 0.9rem;" title="Almacén destino">Almacén destino</th>
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Cod. QBLI">Cod. QBLI</th>
-                                        <th class="p-3" style="min-width: 150px; font-size: 0.9rem;" title="Valor QBLI">Valor QBLI</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="date" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                        <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+<!-- Contenido -->
+<div class="tab-pane fade show active" id="contenido">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="bg-light">
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">Código</th>
+                    <th class="p-3" style="min-width: 350px; font-size: 0.9rem;">Descripción del artículo</th>
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">Almacén</th>
+                    <th class="p-3" style="min-width: 100px; font-size: 0.9rem;">Cant Vta</th>
+                    <th class="p-3" style="min-width: 170px; font-size: 0.9rem;">Precio venta</th>
+                    <th class="p-3" style="min-width: 170px; font-size: 0.9rem;">Total (ML)</th>
+                    <th class="p-3" style="min-width: 170px; font-size: 0.9rem;">Solicita compra</th>
+                    <th class="p-3" style="min-width: 170px; font-size: 0.9rem;">Proveedor</th>
+                    <th class="p-3" style="min-width: 200px; font-size: 0.9rem;">Cantidad a comprar</th>
+                    <th class="p-3" style="min-width: 170px; font-size: 0.9rem;">Precio compra</th>
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">Margen</th>
+                    <th class="p-3" style="min-width: 200px; font-size: 0.9rem;">Fecha solicitud</th>
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">% comisión</th>
+                    <th class="p-3" style="min-width: 200px; font-size: 0.9rem;">Plazo de entrega</th>
+                    <th class="p-3" style="min-width: 200px; font-size: 0.9rem;">Status de picking</th>
+                    <th class="p-3" style="min-width: 200px; font-size: 0.9rem;">Almacén destino</th>
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">Cod. QBLI</th>
+                    <th class="p-3" style="min-width: 150px; font-size: 0.9rem;">Valor QBLI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm codigo-articulo" placeholder="Ej: F123456">
+                            <button class="btn btn-outline-secondary" type="button" onclick="buscarArticuloDesdeBoton(this)">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
-                    </div>
+                    </td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm descripcion" readonly></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm" value="A01"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm cantidad" onchange="recalcularTotal(this)"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm precio" onchange="recalcularTotal(this)"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm total" readonly></td>
+                    <td class="p-2">
+                        <select class="form-select form-select-sm solicita-compra">
+                            <option value="No">No</option>
+                            <option value="Sí">Sí</option>
+                        </select>
+                    </td>
+                    <td class="p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm proveedor" placeholder="Seleccione proveedor" readonly>
+                            <button class="btn btn-outline-secondary" type="button" onclick="abrirModalProveedor(this)">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="date" class="form-control form-control-sm fecha-solicitud"></td>
+                    <td class="p-2"><input type="number" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                    <td class="p-2"><input type="text" class="form-control form-control-sm"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para seleccionar proveedor -->
+<div class="modal fade" id="modalProveedores" tabindex="-1" aria-labelledby="modalProveedoresLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalProveedoresLabel">GET PROVEEDOR</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <span class="input-group-text">Buscar Proveedor</span>
+          <input type="text" class="form-control" id="buscarRUT" placeholder="">
+          <button class="btn btn-outline-primary" onclick="filtrarProveedores()">Buscar</button>
+        </div>
+
+        <table class="table table-striped table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th>Código SN</th>
+              <th>Nombre SN</th>
+            </tr>
+          </thead>
+          <tbody id="tablaProveedores">
+            <!-- Filas generadas dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <!-- Logística -->
 <div class="tab-pane fade show active" id="logistica">
@@ -540,7 +597,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
 <script>
-    // Alternar modo oscuro
+    // =======================
+    // MODO OSCURO
+    // =======================
     function toggleDarkMode() {
         document.body.classList.toggle('dark-mode');
         const isDarkMode = document.body.classList.contains('dark-mode');
@@ -554,7 +613,6 @@
         }
     }
 
-    // Aplicar preferencia guardada al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
         const isDarkMode = localStorage.getItem('darkMode') === 'true';
         if (isDarkMode) {
@@ -562,10 +620,12 @@
         }
     });
 
-    // Clientes de ejemplo
+    // =======================
+    // CLIENTES
+    // =======================
     const clientes = {
         "12345678-9": {
-            nombre: "Ferreteria Marsella",
+            nombre: "Ferretería Los Robles",
             contacto: "Carlos Moya",
             ocRef: "OC-001122"
         },
@@ -576,12 +636,10 @@
         }
     };
 
-    // Función para validar formato básico de RUT chileno
     function validarRut(rut) {
         return /^\d{7,8}-[\dkK]$/.test(rut);
     }
 
-    // Buscar cliente por RUT
     function buscarCliente() {
         const rut = document.getElementById("rutCliente").value.trim();
 
@@ -602,5 +660,115 @@
             document.getElementById("contactoCliente").value = "";
             document.getElementById("ocCliente").value = "";
         }
+   }
+
+
+    // =======================
+    // ARTÍCULOS
+    // =======================
+const articulos = {
+    "F123456": {
+        descripcion: "Martillo de acero 16oz",
+        cantidad: 1,
+        precio: 3490
+    },
+    "F123457": {
+        descripcion: "Destornillador Philips",
+        cantidad: 1,
+        precio: 1500
     }
+};
+
+function buscarArticuloDesdeBoton(boton) {
+    const fila = boton.closest("tr");
+    const inputCodigo = fila.querySelector(".codigo-articulo");
+    const codigo = inputCodigo.value.trim().toUpperCase();
+    const datos = articulos[codigo];
+
+    const hoy = new Date().toISOString().split("T")[0];
+    const inputFecha = fila.querySelector(".fecha-solicitud");
+
+    if (datos) {
+        fila.querySelector(".descripcion").value = datos.descripcion;
+        fila.querySelector(".cantidad").value = datos.cantidad;
+        fila.querySelector(".precio").value = datos.precio.toLocaleString('es-CL');
+        fila.querySelector(".total").value = (datos.precio * datos.cantidad).toLocaleString('es-CL');
+        inputFecha.value = hoy;
+    } else {
+        alert("Artículo no encontrado.");
+        fila.querySelector(".descripcion").value = "";
+        fila.querySelector(".cantidad").value = "";
+        fila.querySelector(".precio").value = "";
+        fila.querySelector(".total").value = "";
+        inputFecha.value = hoy;
+    }
+}
+
+function recalcularTotal(input) {
+    const fila = input.closest("tr");
+    const cantidadTexto = fila.querySelector(".cantidad").value.replace(/\./g, '');
+    const precioTexto = fila.querySelector(".precio").value.replace(/\./g, '');
+
+    const cantidad = parseFloat(cantidadTexto);
+    const precio = parseFloat(precioTexto);
+
+    if (!isNaN(cantidad) && !isNaN(precio)) {
+        const total = cantidad * precio;
+        fila.querySelector(".total").value = total.toLocaleString('es-CL');
+    } else {
+        fila.querySelector(".total").value = '';
+    }
+}
+
+
+
+// Función buscar proveedores
+const proveedores = [
+  { codigo: "P21555555-5", nombre: "Factoring S.A." },
+  { codigo: "P12345666-6", nombre: "Pullman Cargo Factoring" },
+  { codigo: "P98765432-1", nombre: "Servicios Ferreteros" },
+  { codigo: "P22222222-2", nombre: "Sodimac Pro" }
+];
+
+let filaProveedorActiva = null;
+
+function abrirModalProveedor(boton) {
+  filaProveedorActiva = boton.closest("tr");
+  document.getElementById("buscarRUT").value = "";
+  cargarListaProveedores(proveedores);
+  new bootstrap.Modal(document.getElementById("modalProveedores")).show();
+}
+
+function cargarListaProveedores(lista) {
+  const cuerpo = document.getElementById("tablaProveedores");
+  cuerpo.innerHTML = "";
+
+  lista.forEach(p => {
+    const fila = document.createElement("tr");
+    fila.style.cursor = "pointer";
+    fila.onclick = () => seleccionarProveedorDesdeModal(p.codigo);
+    fila.innerHTML = `
+      <td>${p.codigo}</td>
+      <td>${p.nombre}</td>
+    `;
+    cuerpo.appendChild(fila);
+  });
+}
+
+function filtrarProveedores() {
+  const texto = document.getElementById("buscarRUT").value.toLowerCase();
+  const filtrados = proveedores.filter(p =>
+    p.codigo.toLowerCase().includes(texto) || p.nombre.toLowerCase().includes(texto)
+  );
+  cargarListaProveedores(filtrados);
+}
+
+function seleccionarProveedorDesdeModal(codigo) {
+  if (filaProveedorActiva) {
+    const input = filaProveedorActiva.querySelector(".proveedor");
+    input.value = codigo;
+  }
+  bootstrap.Modal.getInstance(document.getElementById("modalProveedores")).hide();
+}
 </script>
+
