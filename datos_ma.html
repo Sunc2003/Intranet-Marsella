@@ -1,3 +1,4 @@
+<!-- 👇 Tu código completo actualizado, ya funcional 👇 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos Maestros de Artículos - Ferretería Marsella</title>
 
-    <!-- Bootstrap -->
+    <!-- Bootstrap y estilos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,98 +26,32 @@
         body.dark-mode {
             background-color: var(--color-fondo-gris) !important;
             color: var(--color-blanco) !important;
-            transition: all 0.3s ease;
         }
 
-        .dark-mode .card {
-            background-color: var(--color-card-dark) !important;
-            color: var(--color-blanco) !important;
-            border: 1px solid var(--color-gris-placeholder) !important;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .form-control, .dark-mode .form-select {
-            background-color: var(--color-negro);
-            border-color: var(--color-gris-placeholder);
-            color: var(--color-blanco);
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .form-control::placeholder {
-            color: var(--color-blanco);
-        }
-
-        .dark-mode .form-control:focus, .dark-mode .form-select:focus {
-            background-color: var(--color-negro);
-            border-color: var(--color-rojo-alerta);
-            box-shadow: 0 0 0 0.25rem rgba(255, 68, 68, 0.25);
-        }
-
-        .dark-mode .table {
-            color: var(--color-blanco);
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .bg-white {
-            background-color: var(--color-card-dark) !important;
-            color: var(--color-blanco) !important;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .breadcrumb-item a {
-            color: var(--color-rojo-alerta) !important;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .breadcrumb-item.active {
-            color: var(--color-blanco);
-        }
-
-        .dark-mode .btn-outline-dark {
-            color: var(--color-blanco);
-            border-color: var(--color-blanco);
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .btn-outline-dark:hover {
-            color: var(--color-negro);
-            background-color: var(--color-blanco);
-        }
-
-        .dark-mode .table-hover tbody tr:hover {
-            background-color: var(--color-hover-dark);
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .footer {
-            background-color: var(--color-negro) !important;
-            transition: all 0.3s ease;
-        }
-
-        .dark-mode .text-dark {
-            color: var(--color-blanco) !important;
-        }
-
-        .dark-mode label {
-            color: var(--color-blanco);
-        }
-
+        .dark-mode .card,
+        .dark-mode .form-control,
+        .dark-mode .form-select,
+        .dark-mode .bg-white,
+        .dark-mode .breadcrumb-item a,
+        .dark-mode .breadcrumb-item.active,
+        .dark-mode .btn-outline-dark,
+        .dark-mode .table,
+        .dark-mode .footer,
+        .dark-mode .text-dark,
+        .dark-mode label,
         .dark-mode .form-label {
-            color: var(--color-blanco);
+            background-color: var(--color-card-dark) !important;
+            color: var(--color-blanco) !important;
+            border-color: var(--color-gris-placeholder) !important;
         }
 
         .bg-primary {
             background-color: var(--color-rojo-alerta) !important;
         }
 
-        .bg-info {
-            background-color: #17a2b8 !important;
-        }
-
         .btn-primary {
             background-color: var(--color-rojo-alerta);
             border-color: var(--color-rojo-alerta);
-            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
@@ -124,107 +59,20 @@
             border-color: #ff6666;
         }
 
-        .btn-info {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-            transition: all 0.3s ease;
-        }
-
-        .btn-info:hover {
-            background-color: #138496;
-            border-color: #138496;
-        }
-
-        .badge.bg-success {
-            background-color: var(--color-verde-promocion) !important;
-        }
-
         #resultadosBusqueda {
             display: none;
         }
     </style>
-    <script>
-        function toggleDarkMode() {
-            const body = document.body;
-            const button = document.getElementById('darkModeBtn');
-            const icon = button.querySelector('i');
-            
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                button.innerHTML = '<i class="fas fa-moon me-2"></i>Modo Noche';
-                localStorage.setItem('darkMode', 'disabled');
-            }
-        }
-
-        function buscarArticulos() {
-            const numeroArticulo = document.getElementById('numeroArticulo').value.toLowerCase();
-            const descripcion = document.getElementById('descripcion').value.toLowerCase();
-            const idAdicional = document.getElementById('idAdicional').value.toLowerCase();
-            
-            const filasArticulos = document.getElementById('tablaArticulos').getElementsByTagName('tr');
-            const filasAlmacen = document.getElementById('tablaAlmacen').getElementsByTagName('tr');
-            
-            // Mostrar las tablas
-            document.getElementById('resultadosBusqueda').style.display = 'block';
-            
-            // Mapeo de artículos con sus almacenes
-            const articuloAlmacen = {
-                'ART001': 'ALM01',
-                'ART002': 'ALM02',
-                'ART003': 'ALM03'
-            };
-            
-            for (let fila of filasArticulos) {
-                const celdas = fila.getElementsByTagName('td');
-                if (celdas.length > 0) {
-                    const numArt = celdas[0].textContent.toLowerCase();
-                    const desc = celdas[1].textContent.toLowerCase();
-                    const id = celdas[4].textContent.toLowerCase();
-                    
-                    const coincide = (numeroArticulo === '' || numArt.includes(numeroArticulo)) &&
-                                   (descripcion === '' || desc.includes(descripcion)) &&
-                                   (idAdicional === '' || id.includes(idAdicional));
-                    
-                    fila.style.display = coincide ? '' : 'none';
-                    
-                    if (coincide) {
-                        const codigoAlmacen = articuloAlmacen[celdas[0].textContent];
-                        for (let filaAlmacen of filasAlmacen) {
-                            const celdasAlmacen = filaAlmacen.getElementsByTagName('td');
-                            if (celdasAlmacen.length > 0) {
-                                filaAlmacen.style.display = celdasAlmacen[0].textContent === codigoAlmacen ? '' : 'none';
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const darkMode = localStorage.getItem('darkMode');
-            if (darkMode === 'enabled') {
-                document.body.classList.add('dark-mode');
-                const button = document.getElementById('darkModeBtn');
-                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
-            }
-        });
-    </script>
 </head>
 <body class="bg-light">
     <header class="container-fluid bg-white text-dark p-3 shadow">
         <div class="d-flex justify-content-between align-items-center">
-            <img src="img/MARSELLA (2).png" alt="Logo Ferretería Marsella" style="width: auto; height: 60px; object-fit: contain;" class="rounded animate__animated animate__fadeIn">
+            <img src="img/MARSELLA (2).png" alt="Logo Ferretería Marsella" style="height: 60px;" class="rounded animate__animated animate__fadeIn">
             <div>
                 <span class="me-3">Bienvenido/a: <strong id="userName">Millaray Esposito</strong></span>
-                <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn"><i class="fas fa-moon me-2"></i>Modo Noche</button>
+                <button onclick="toggleDarkMode()" class="btn btn-outline-dark" id="darkModeBtn">
+                    <i class="fas fa-moon me-2"></i>Modo Noche
+                </button>
                 <a href="logout.html" class="btn btn-danger ms-2">Cerrar Sesión</a>
             </div>
         </div>
@@ -249,14 +97,6 @@
                         <label class="form-label">Número de Artículo</label>
                         <input type="text" class="form-control" id="numeroArticulo">
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">ID Adicional</label>
-                        <input type="text" class="form-control" id="idAdicional">
-                    </div>
                     <div class="col-12">
                         <button type="button" class="btn btn-primary" onclick="buscarArticulos()">
                             <i class="fas fa-search me-2"></i>Buscar
@@ -269,83 +109,114 @@
         <div id="resultadosBusqueda">
             <div class="card shadow mb-4">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-box me-2"></i>Información del Artículo</h5>
+                    <h5 class="mb-0"><i class="fas fa-box me-2"></i>Resultado del Artículo</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Número de Artículo</th>
+                                    <th>Código</th>
                                     <th>Descripción</th>
                                     <th>Código de Barras</th>
                                     <th>Fabricante</th>
                                     <th>ID Adicional</th>
+                                    <th>Stock</th>
+                                    <th>Costo</th>
+                                    <th>Alto (cm)</th>
+                                    <th>Ancho (cm)</th>
+                                    <th>Largo (cm)</th>
                                 </tr>
                             </thead>
                             <tbody id="tablaArticulos">
-                                <tr>
-                                    <td>ART001</td>
-                                    <td>Martillo de Carpintero Stanley</td>
-                                    <td>7891234567890</td>
-                                    <td>Stanley</td>
-                                    <td>MART-001</td>
-                                </tr>
-                                <tr>
-                                    <td>ART002</td>
-                                    <td>Sierra Circular Dewalt</td>
-                                    <td>7899876543211</td>
-                                    <td>Dewalt</td>
-                                    <td>SIER-002</td>
-                                </tr>
-                                <tr>
-                                    <td>ART003</td>
-                                    <td>Taladro Inalámbrico Bosch</td>
-                                    <td>7895678901235</td>
-                                    <td>Bosch</td>
-                                    <td>TALA-003</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
+    </main>
 
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-warehouse me-2"></i>Información de Almacén</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <div id="infoAlmacen">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Código de Almacén</th>
-                                        <th>Nombre de Almacén</th>
-                                        <th>Primera Ubicación</th>
-                                        <th>Ubicación por Defecto</th>
-                                        <th>En Stock</th>
-                                        <th>Comprometido</th>
-                                        <th>Pedido</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tablaAlmacen">
-                                    <tr>
-                                        <td>ALM01</td>
-                                        <td>Almacén Central</td>
-                                        <td>A-01-01</td>
-                                        <td>A-01-01</td>
-                                        <td>100</td>
-                                        <td>20</td>
-                                        <td>50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ALM02</td>
-                                        <td>Almacén Sur</td>
-                                        <td>B-01-01</td>
-                                        <td>B-01-01</td>
-                                        <td>75</td>
-                                        <td>15</td>
-                                        <td>30</td>
-                                    </tr>
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const button = document.getElementById('darkModeBtn');
+            const icon = button.querySelector('i');
+
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                button.innerHTML = '<i class="fas fa-moon me-2"></i>Modo Noche';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+
+        async function buscarArticulos() {
+            const numeroArticulo = document.getElementById('numeroArticulo').value.trim();
+
+            if (numeroArticulo === '') {
+                alert('Por favor ingresa un número de artículo.');
+                return;
+            }
+
+            try {
+                const response = await fetch("https://hook.eu2.make.com/l7wuv5wrd54mk1l4d2wqsrk9cq3ddbv7", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ "Codigo": numeroArticulo })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor');
+                }
+
+                const data = await response.json();
+
+                if (data && data["Codigo"]) {
+                    document.getElementById('resultadosBusqueda').style.display = 'block';
+
+                    document.getElementById('tablaArticulos').innerHTML = `
+                        <tr>
+                            <td>${data["Codigo"]}</td>
+                            <td>${data["Descripcion"]}</td>
+                            <td>${data["Codigo de barra"]}</td>
+                            <td>${data["Fabricante"]}</td>
+                            <td>${data["ID Adicional"]}</td>
+                            <td>${data["Stock"]}</td>
+                            <td>${data["Costo"]}</td>
+                            <td>${data["Alto"]}</td>
+                            <td>${data["Ancho"]}</td>
+                            <td>${data["Largo"]}</td>
+                        </tr>
+                    `;
+                } else {
+                    alert("Artículo no encontrado.");
+                    document.getElementById('resultadosBusqueda').style.display = 'none';
+                }
+
+            } catch (error) {
+                console.error("Error al buscar artículo:", error);
+                alert("Hubo un error al conectar con el servidor.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'enabled') {
+                document.body.classList.add('dark-mode');
+                const button = document.getElementById('darkModeBtn');
+                button.innerHTML = '<i class="fas fa-sun me-2"></i>Modo Día';
+            }
+        });
+    </script>
+</body>
+</html>
